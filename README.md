@@ -12,3 +12,7 @@
 ### Projetos ágeis com SCRUM
 - concluído em 11/12/2021
 - carga horária: 2h
+
+### Criando seu Primeiro Repositório no GitHub
+- concluído em 11/12/2021
+- carga horária: 1h
