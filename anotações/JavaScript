@@ -1,0 +1,156 @@
+Introdução ao javascript com Stephany Nusch
+
+Javascript é uma linguagem interpretada onde o browser executa no mesmo instante sem precisar passar por um conpilador
+
+Interpretada, baseada em protótipos, multiparadigma, usada em aplicações web client-side, padrão ECMAScript
+
+ECMAScript é um conjunto de normas lançadas e usadas
+
+css <link rel="stylesheet" href="assets/css/styles.css"/>
+js <script src="assets/js/script.js"></script>
+
+Console>
+> var a = 0
+< undefined
+> a
+< 0
+
+DOM Document Object Model
+
+> var heading1 = document.getElementsByTagName('h1')[0]
+< undefined
+> heading1
+< <h1>Olá, mundo!</h1>
+> heading1.style.color = 'red'
+______________________________________________________________
+
+Sintaxe básica em javascript com @dianamartine
+
+Tipos primitivos são: bool, null, undefined, number, string, object, function
+
+typeof(variável)
+
+var - escopo global e local, valor pode ser alterado, se não declarada será tratado como null
+
+let - escopo local de bloco, valor pode ser alterado, se não tiver valor declarado será tratado como null
+
+const - escopo local de bloco, somente leitura, valor inicial é obrigatório e não pode ser alterado
+
+Escopo em js define a limitação e visibilidade de um bloco de código.
+
+Escopo global - quando a variável é declarada fora de qualquer bloco, sua visibilidade fica disponível em todo o código
+
+Escopo local - quando a variável é declarada dentro de um bloco, sua visibilidade pode ficar disponível ou não
+
+iniciar com letras, underscore ou cifrão, nunca com números
+
+não usar espaço, use o camelCase
+
+não use palavras reservadas; ex. function
+
+declarar sempre no topo do bloco de código
+
+sinal de = significa atribuição. var nome recebe o valor x
+
+dois sinais de igual quer dizer igualdade em comparação
+
+comparação idêntica é representada por ===
+
+Operadores aritméticos
+
++  adição
+-  subtração
+*  multiplicação
+/  divisão
+%  divisão inteira (resto de uma divisão)
+** potenciação
+
+operadores relacionais
+
+Consultam relação entre os valores
+
+>  maior que
+<  menor que
+>= maior ou igual a
+<= menor ou igual a
+
+Operadores lógicos
+
+&& - considera que todos os valores seja true
+!! - considera que qualquer valor seja true
+!  - inverte o valor de true para false ou vice-versa
+
+let array = []
+
+alguns métodos array:
+
+forEach() - itera um array
+array.forEach(function(item, index){console.log(item, index)});
+
+push() - add item ao final da array
+array.push('novo item');
+
+pop() - remove último item
+array.pop();
+
+shift() - remove o primeiro item
+array.shift();
+
+unshift() - add item ao início
+array.unshift('novo item);
+
+indexOf() - retorna o índice de um valor
+array.indexOf(var);
+
+splice() - remove ou substitui um item pelo index
+array.splice(startIndex, finalIndex);
+
+slice() - retorna uma parte de um array
+let novoArray = array.slice(0, 3);
+
+Objetos são dados que possuem propriedade e valores que definem suas características e devem ser declarados entre chaves {}.
+
+var xicara = {
+	cor: 'azul',
+	tamanho: 'p',
+	funcao: tomarCafe()
+}
+
+pode ser usado assim var cor = xicara.cor;
+
+para desistruturação use {}. ex: var {} = array;
+
+Estruturas condicionais são instruções para realizar determinada tarefa a partir de uma condição, seja por decisão ou repetição.
+
+if, else, else if, if dentro de if é um ninho de if, 
+if ternário = 1 ? 1 : 0
+switch/case sempre use break;
+
+laços de repetição são estruturas condicionais que repetem uma instrução até atingir a condição:
+
+var object = {prop1 : 'val1', prop2: 'val2', prop3: 'val3'};
+
+for       -  executa a instrução até ser false
+for/in    -  executa repetição a partir de uma propriedade
+for/of    -  executa repetição a partir do valor da propriedade
+[for/of não funciona com object pois as propriedades variam ao contrário de uma array onde o índice é sempre um número inteiro]
+while     -  
+do/while  -  
+
+funções são blocos de comandos e instruções para a execução de determinadas tarefas
+
+função declarativa tem que ter obrigatoriamente um nome
+
+expressões de function a nomeação é opcional
+
+var funcao = function(){}
+
+arrow function são expressões de sintaxe curta, anônimas
+
+var funcao = () => {}
+
+template string é feito com uso de crases `` e pode misturar valores de objetos diferentes como string + number. ex: `O resultado de ${n1} + ${n2} = ${resultado}`
+
+transforme strings em numbers com Number('100')
+
+
