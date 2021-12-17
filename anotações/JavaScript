@@ -149,8 +149,350 @@ arrow function são expressões de sintaxe curta, anônimas
 
 var funcao = () => {}
 
-template string é feito com uso de crases `` e pode misturar valores de objetos diferentes como string + number. ex: `O resultado de ${n1} + ${n2} = ${resultado}`
+template string é feito com uso de crases `` e pode misturar valores de objetos diferentes como string + number. 
+ex: `O resultado de ${n1} + ${n2} = ${resultado}`
 
 transforme strings em numbers com Number('100')
+
+_____________________________________________________________
+
+Variáveis e tipos / Stephany Nusch
+
+camelCase, snacke_case, kebab-case, PascelCase, UPPER_CASE_SNAKE_CASE
+
+var a = 1; //global
+var b = 2; //global
+if (a === 1) {
+	var a = 11; //global
+	let b = 22; //local in-block
+	
+	console.log(a); //11
+	console.log(b); //22
+}
+console.log(a); //11
+console.log(b); //2
+
+var e let tem escopos diferentes, var é global e let é local
+
+hoisting é atribuir um valor para a variável antes de declarar ela. 
+ex: a = 1; var a;
+
+Redeclaração na var pode, mas na let não pode. ex: var a = 1; var a = 2;
+
+Reatribuição pode nas var e let, const não. ex: let a = 1; a = 2;
+
+let precisa ser declarado antes de complilar.
+
+const declara em SNACK_UPPER_CASE, é escobo de bloco, não faz hoisting
+
+SNACK_UPPER_CASE sem declaração, porém atribuido valor é tratada como uma var. 
+ex: MY_CONST = "Elvis".
+
+JS tem tipagem dinâmica e fraca. Antes de declarar um valor vc não precisa declarar o tipo.
+
+tipos primitivos não tem métodos. Ex: string
+tipos composto contém métodos. Ex: array
+
+let nome = new String("nome e sobrenome") retorna um Object
+nome.split(""); //["n", "o", "m", "e", " ", "e", " ", "s", "o", "b", "r", "e", "n", "o", "m", "e"]
+nome.split(" "); //["nome", "e", "sobrenome"]
+
+nome.includes("sobrenome"); //true
+nome.startsWith("n"); //true
+nome.endsWith("e"); //true
+nome.replace("nome","Nome"); //Nome e sobrenome (OBS. replace não substitiu a string original)
+
+let num = 2.6;
+Math.floor(num); //2 (arredonda pra baixo)
+Math.ceil(num); //3 (arredonda pra cima)
+
+Array: lista iterável de elementos
+let array = []
+array.every(item => item === 5); //false (verifica se todos os itens são 5)
+array.some(item => item === 5); //false (algum item é 5?)
+array.reverse(); //(reverte a array)
+array.join(string); //junta todos os caracteres
+
+Object é estrutura tipo {chave:valor}
+let obj = {};
+obj.name = "nome"; //obj.name === obj["name"]
+obj.age = 20;
+Object.values(obj); //["nome", 20]
+Object.keys(obj); //["name", "age"]
+
+___________________________________________________________
+
+Funções / Stephany Nusch
+
+Função anônima é quando uma variável armazena uma function. 
+const soma = function (a,b) { return a+b; };
+soma(1, 2); //3
+
+Função auto invocável ou IIFE(Immediately Invoked Function Expression)
+
+Uma function anônima entre parênteses, seguida por outro par de parênteses, que representa sua chamada:
+(function(){ let name = "nome"; return name; })() //nome
+
+pode passar parâmetros na IIFE:
+(function(a,b){return a+b;})(1, 2) //3
+
+o return da IIFE pode ser armazenada numa variável:
+const soma = (function(a,b){ return a+b; })(1, 2); //3
+
+Callbacks é uma function passada como argumento para outra function:
+const calc = function(operacao, a, b) { return operacao(a, b)}
+const soma = function(a,b){return a+b}
+const sub = function(a,b){return a-b}
+const resultSoma = calc(soma,1,2); //3
+const resultSub = calc(sub,1,2); //-1
+
+arguments é um array com todos os parâmetros passados quando a function for invocada:
+function findMax() {
+	let max = -Infinity; //pra receber qq num, positivo ou negativo
+	for(let i = 0; i < arguments.length; i++) {
+		if (arguments[i] > max) {
+			max = arguments[i];
+		}
+	}
+	return max;
+}
+findMax(1, 2, 3, 6, 90, 1); //90
+
+function showArgs() {
+	return arguments;
+}
+showArgs(1, 2, [2, 3, 4], "string"); //[1, 2, Array(3), "string"]
+
+Técnicas Array
+
+SPREAD é uma forma de lidar separadamente com elementos, ou seja, o que era parte de um array se torna um elemento independente
+function sum(x,y,z){return x+y+z}
+const num = [1,2,3];
+sum(...num); //6
+
+REST combina os argumentos em um array tornando um elemento independente como parte de um array
+function tamanhos(...args){return args.length;}
+tamanho(); //0
+tamanho(1,2,5,10); //4
+
+Object Destructuring é a técnica usada para pegar dados específicos dentro de um objeto:
+const user = {
+	id: 42,
+	userName: 'username',
+	fullName: {
+		firstName: 'Nome',
+		lastName: 'Sobrenome'
+	}
+};
+function userId({id}){return id;}
+function getFullName({fullName:{firstName:first, lastName:last}}){
+	return `${first} ${last}`;
+}
+userId(user); //42
+getFullName(user); //Nome Sobrenome
+
+switch/case compara tipo e valor (===). ou seja, 1 !== "1"
+
+FOR executa verificação dentro de elementos iterários (arrays,string)
+
+for...in loop entre props enumeráveis de um objeto
+const meuObj = {nome:"Nome",idade:20,cidade:"Sampa"};
+
+function forInEx(obj){
+	for(prop in obj) return prop; 
+}
+
+function forInEx2(obj){
+	for(prop in obj) return obj[prop];
+}
+
+forInEx(meuObj); //nome, idade, cidade
+forInEx2(meuObj); //Nome, 20, Sampa
+
+for...of faz loop entre estruturas iteráveis (arrays, strings)
+function logLetras(palavra) {for(letra of palavra){return letra;}}
+function logNums(nums){for(num of nums){return num;}}
+
+while executa uma instrução até a condição ser false.
+do...while executa uma instrução até ser false pelo menos uma vez.
+
+This é a usada em referência a um contexto
+
+const pessoa = {
+	fname:"Elvis", 
+	lname:"Silva",
+	id: 1,
+	fullName: function() {return this.fname+" "+this.lname;},
+	getId: function() {return this.id;}
+}
+pessoa.fullName(); //Elvis Silva
+pessoa.getId(); //1
+
+call 
+
+const pessoa = {nome: "Elvis"};
+const animal = {nome: "Tygra"};
+function getNome() {return this.nome;}
+getNome.call(pessoa); //Elvis
+
+bind clona a estrutura da função chamada e aplica o valor do objeto passado como parâmetro.
+
+const retornaNomes = function() {return this.name;}
+let elvis = retornaNomes.bind({nome: 'Elvis'});
+elvis(); //Elvis
+
+Arrow function não faz hoisting
+soma(2,4);				   | assim vai
+const soma = (a,b) => a+b; | dar erro
+ou seja, sempre determine a arrow function antes de chamar ela
+
+restrições de arrow function:
+. this será sempre global. Métodos para alterar seu valor não funcionarão.
+. não existe o objeto arguments
+. o construtor new tbm não pode ser utilizado
+
+________________________________________________________________
+
+Coleções chaveadas Map e Set
+
+Map é uma colação de arrays no formato [key:value] e pode ser iterado por um loop for...of
+const myMap = new Map();
+myMap.set('apple','fruit'); //Map(1) {"apple" => "fruit"}
+myMap.get(apple); //"fruit"
+myMap.delete("apple"); //true
+myMap.get("apple"); //undefined
+
+Map vs Objeto
+Maps podem ter chaves de qq tipo;
+Maps possuem a propriedade length
+Maps são mais fáceis de iterar
+utilizado quando o valor das keys é desconhecido
+os Values tem o mesmo tipo
+pode acessar vey:value direto:
+
+const usuarios = new Map();
+usuarios.set('Luiz','Admin');
+usuarios.set('Jorge','User');
+
+let admins = [];
+for([key,value] of map){
+	if(value === 'Admin'){
+		admins.push(key);
+	}
+}
+
+
+Sets são estruturas que armazenam apenas valores únicos que não se repetem como pode ser feito nas arrays.
+const array = [1,1,2,2,3,3]; 
+const set = new Set(array); //{1, 2, 3}
+set.add(5); //adiciona um valor
+set.has(3): //true
+set.has(4); //false
+set.delete(5); //
+
+Set vs Array
+possui valores únicos
+size em vez de length
+não possui os métodos map, filter, reduce, etc...
+
+__________________________________________________________________
+
+Errors
+
+ECMAScript Error são erros que ocorrem em tempo de execução composto por mensagem, nome, linha e callstack.
+
+DOMException são relacionados ao Document Object Model (DOM)
+
+___________________________________________________________________
+
+Assíncrono não ocorre e não se efetiva ao mesmo tempo
+
+JS por padrão roda de maneira síncrona
+
+Promises é um objeto de processamento assíncrono, inicialmente seu valor é desconhecido. Ela pode então ser resolvida ou rejeitada.
+
+Promises tem 3 estados, Pending, Fulfilled e Rejected
+
+Estrutura de uma promise
+
+const promise = new Promise((resolve, reject) => {
+	window.setTimeout(() => {
+		resolve(console.log('Resolvida'));
+	}, 2000);
+});
+
+opcional
+await promise
+	.then((result) => result + ' passando pelo then')
+	.then((result) => result + ' e agora acabou!')
+	.catch((err) => console.log(err.message));
+	
+//Após 2 segundos retornará "Resolvida passando pelo then e agora acabou!"
+
+Async/await, functions assíncronas precisam dessas duas palavras chaves
+
+async function resolvePromisse() {
+	const promise = new Promise((resolve, reject) => {
+		window.setTimeout(() => {
+			resolve(console.log('Resolvida'));
+		}, 2000);
+	});
+
+	const resolved = await promise
+		.then((result) => result + ' passando pelo then')
+		.then((result) => result + ' e agora acabou!')
+		.catch((err) => console.log(err.message));
+	
+	return resolved;
+}
+	
+sem await uma promise retorna outra promise
+
+_________________________________________________________________________
+
+API (Application Programming Interface) é uma forma de intermediar os resultados do back com o front. O acesso pode ser feito por meio de Url
+
+JSON (JavaScript Object Notation) precisa se tratado sempre que recebido
+
+fetch retorna uma promise e sempre precisa converter para json quando recebida como string
+
+fetch operações no DB (POST, GET, PUT, DELETE, etc)
+
+fetch('https://endereco-da-api.com/', {method: 'GET', cache: 'no-cache',})
+	.then(response => response.json())
+	.then(json => console.log(json))
+	
+ou post
+fetch('https://endereco-do-api.com/', {
+	method: 'POST', 
+	cache: 'no-cache', 
+	body: JSON.stringify(data)
+})
+	.then(response => response.json())
+	.then(json => console.log(json))
+	
+//retorna uma promise
+
+________________________________________________________________________
+
+Paradigma na programação é dividido em interativo e declarativo
+
+Pilares da orientação a objetos são 4: herança, polimorfismo, encapsulamento e abstração
+
+Programas são objetos que possuem uma série de propriedades
+
+Abstração é simplificar e generalizar objetos
+
+Herança objeto filho
+
+Encapsulamento onde cada classe tem propriedades independentes
+
+Polimorfismo herdam a mesma clase pai porém com maneiras diferende.
+
+OOJS (JavaScript Orientada a Objetos)
+
+Protótipos: esqueleto de um objeto, ou seja, todos os objetos de JS herdam métodos e propriedades de um prototype. O Object.prototype está no topo desta cadeia
+
+javascript não possui classes nativamente e todas as classes são objetos e a herança se dá por protótipos.
 
 
