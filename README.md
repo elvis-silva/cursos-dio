@@ -37,8 +37,32 @@
 - concluído em 15/12/2021
 - carga horária: 2h
 
-### Sintaxe e Operadores
+### Sintaxe e Operadores 
 - concluído em 15/12/2021
 - carga horária: 2h
 
-### CARGA HORÁRIA TOTAL: 27h
+### Variáveis e tipos
+- concluído em 16/12/2021
+- carga horária: 3h
+
+### Funções
+- concluído em 16/12/2021
+- carga horária: 1h
+
+### Coleções
+- concluído em 16/12/2021
+- carga horária: 1h
+
+### Debugging e Error Handling
+- concluído em 16/12/2021
+- carga horária: 2h
+
+### Javascript Assíncrono
+- concluído em 16/12/2021
+- carga horária: 1h
+
+### Orientação a objetos
+- concluído em 16/12/2021
+- carga horária: 1h
+
+### CARGA HORÁRIA TOTAL: 36h
