@@ -38,4 +38,6 @@ Interface é um contrato que pode ser implementado por uma classe. É como se fo
 
 Manupulação de Arquivos
 
-Classes 
+Classes estáticas File, Directory e Path
+
+
