@@ -1,0 +1,41 @@
+C-sharp / Leonardo de Lima Buta @leonardo-buta
+
+Programação Orientação a Objetos POO
+
+É um paradigma de programação, corresponde a uma técnica de programação para um fim específico em 4 pilares: abstração, encapsulamento, herança e polimorfismo.
+
+Principais conceitos são classes e objetos.
+
+Tipos de Paradigmas
+
+POO, programação estruturada, imperativa, procedural, orientada a eventos, lógica, etc
+
+Paradigma é diferente de linguagem de programação.
+
+Linguagem de programação implementa um ou mais paradigmas
+
+Paradigma nada mais é dos que um modelo de técnicas, estruturas e formas de solucionar um problema.
+
+Abstração
+
+Encapsulamento serve para protejer uma classe e definir limites para alterações de suas propriedades, serve para ocultar seu comportamento e expor somente o necessário.
+
+Herança permite reutilizar atributos, métodos e comportamento de uma classe em outras classes. Serve para agrupar obletos que são do mesmo tipo, mas com características diferentes.
+
+Polimorfismo sobrescreve métodos das classes filhas para se comportarem de maneira diferente e ter a própria implementação.
+
+Polimorfismo em tempo de compilação (Overload/Early Binding)
+
+Polimorfismo em tempo de execução (Override/Late Binding)
+
+Classe abstrata tem como objetivo ser exclusivamente um modelo para ser herdado, portanto não pode ser herdada. Você pode implementar métodos ou deixar a cargo de quem herdar. Método abstrato é obrigratório sobrescrever na implementação.
+
+Classe selada tem como objetivo impedir que outras classes façam uma herança dela, ou seja, nenhuma classe pode ser derivada dela. Também existem métodos e propriedades seladas.
+
+Classe object, System.Object é a mãe de todas as classes na hierarquia do .NET, ou seja, todas as classes derivam, direta ou indiretamente da classe Object e ela tem como objetivo prover serviços de baixo nível para suas classes filhas.
+
+Interface é um contrato que pode ser implementado por uma classe. É como se fosse uma classe abstrata, podendo definir métodos abstratos para serem implementadas, Assim como a classe abstrata, uma interface não pode ser instanciada. Só é necessário implementar um método em caso de falta de um padrão no método da interface.
+
+Manupulação de Arquivos
+
+Classes 
