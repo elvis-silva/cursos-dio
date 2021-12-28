@@ -40,4 +40,31 @@ Manupulação de Arquivos
 
 Classes estáticas File, Directory e Path
 
+Construtores
+
+Um construtor é um método especial que contém o mesmo nome de seu tipo classe, e tem o objetivo de definir valores padrão, limitar uma instância e facilitar a instanciação de um objeto.
+
+. construtor não possui um return
+. construtor padrão é sempre definido quando não declaramos nenhum para sua classe
+. a classe pode ter mais de um construtor
+
+ Singleton permite uma ínica instância na sua aplicação, Ex:
+ 
+ private MyClass instance;
+ 
+ public static MyClass GetInstance() {
+ 	if(instance == null) {
+ 		instance = new MyClass();
+	}
+	return instance;
+ }
+
+Readonly é um modificador somente leitura que bloqueia um campo contra alterações que não sejam em sua inicialização ou pelo próprio construtor.
+
+Constante é um valor que só pode ser atribuído no momento de sua inicialilação e não pode ser modificado posteriormente.
+
+Delegate é uma maneira de passar um método como referência, podendo ser usado como um callback, aceitando qualquer método que contenha a mesma assinatura.
+
+Evento é um mecanismo de comunicação entre objetos, onde existe um publisher, que realiza o evento ou o subscriber, que se inscreve em um evento.
+
 

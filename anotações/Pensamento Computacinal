@@ -1,0 +1,79 @@
+Pensamento Computacional / Juliana Mascarenhas
+
+Decomposição -> Reconhecimento de Padrões -> Abstração -> Design de Algoritmo
+
+input -> operator -> output
+
+Definir -> testar -> aperfeiçoar
+
+refinamento -> teste -> análise
+
+Variação dos pilares: Raciocínio lógico e refinamento
+
+Raciocínio lógico <-> [1] decomposição <-> padrões <-> abstração <-> algoritmo <-> refinamento <-> Raciocínio lógico...
+
+Competências:
+
+Pensamento sistemático, colaboração, criatividade e design, facilitador
+
+Habilidades complementares
+
+ . Raciocínio lógico é uma forma de pensamento estruturado, ou raciocínio, que permite encontrar a conclusão ou determinar a resolução de um problema.
+
+Classificação: Indução, Dedução e Abdução
+
+Inferência > analítica > dedução
+Inferência > sintética > abdução e indução
+
+ . Aperfeiçoamento é encontrar solução eficiente, otimizar processos, simplificar linhas de código e funções bem definidas
+ 
+ Vantagens:
+ 
+ Maior compreensão, eficiência, menos tempo e menos armazenamento
+ 
+Síntese é um processo de recomposição
+
+ordem de execução de tarefas menores é sequencial, em fila e paralelo, concomitantemente
+
+decomposição = variáveis, pequenos problemas e segmentação
+
+decomposição = identificar, coletar e executar
+
+Reconhecimento de Padrões
+ . Modelo base
+ . Estrutura invariante
+ . Repetição
+ 
+Porque determinar padrões? Generalizar.
+
+Como simular comportamento:
+ . Representação de atributo
+ . Aprendizado - conceito associado ao objeto
+ . Armazenar dados
+ . Regras de decisão
+ 
+Abstração processo intelectual de isolamento de um objeto da realidade
+
+Generalizar torna-se geral, mais amplo, extensão
+
+Generalização pela lógica é a operação intelectual que consiste em reunir numa classe geral um conjunto de seres ou fenômenos similares.
+
+Desenvolvimento do programa:
+ . Análise
+ . Algoritmo
+ . Codificação
+ 
+Algoritmos é a sequência de passos com objetivos definidos para execução de tarefas específicas. Um conjunto de operações que resultam em uma sucessão finita de ações
+
+Como construir um algoritmo?
+ . Compreender o problema
+ . Definir dados de entrada 
+ . Definir processamento
+ . Definir dados de saída
+ . Utilizar um método de construção
+ . Teste e diagnóstico
+ 
+ Construção de um algoritmo:
+ Narrativa, fluxograma e pseudocódigo
+ 
+ 
