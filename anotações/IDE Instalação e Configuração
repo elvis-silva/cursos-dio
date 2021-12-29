@@ -1,0 +1,30 @@
+IDE / Giovanna dos santos ramos
+
+Os templates estão disponíveis a partir das cargas de trabalho instaladas
+
+a depuração é feita quando colocado um breakpoint no código e depois executado
+
+é possível navegar pelo código no depurador usando comandos
+
+f9 cria braackpoint
+f10 continua linha por linha
+
+a inspeção deve ser feita na depuração, pode ser feita passando o mouse por cima da variável ou abrindo a janela QuickWatch pelo menu depurar
+
+caso o projeto não esteja associado ao git podemos criar um repo novo no menu git->Criar um repo git
+
+depois de clonar ou criar um repo é possivel acessa-lo no menu git->repo locais
+
+TESTES
+
+Vai ser criado um novo projeto dentro da solução com o arquivo de teste, cada método deve ser configurado com o padrão AAA (Arrange Act Assert)
+
+para criar um teste devemos clicar no método que vai ser testado com o botão direito e então criar testes de unidade
+
+a seção Organizar (Arrange) de um método de teste de unidade inicializa os objetos e define o valor dos dados que são passados para o método sendo testado.
+
+a seção Agir (Act) invoca o método sendo testado com os parâmetros organizados
+
+a seção Declarar (Assert) verifica se a ação do método em teste se comporta conforme o esperado
+
+IDE Instalação e Configuração (Visual Studio)

@@ -1,0 +1,103 @@
+Primeiros passos para começar a programar
+
+Objetivo da computação é minimizar esforços e otimizar recursos
+
+ábaco e quadrante [início]
+
+Pai da computação: Alan Turing
+
+Algoritmo: base matemática e noção matemática
+
+Espaço da memória? Dados e programas [arquitetura de von newmann]
+
+Primeira máquina: Blaise Pascal
+
+Charles Xavier Thomas: Arithmometer
+
+Charles Babbage idealizou um calculador analítico, o conceito de programação
+
+Ada Lovelace educada por De Morgan é considerada a primeira programadora após criar os primeiros conceitos do contador analítico
+
+Herman Hollerith criou aos 19 anos a primeira máquina de tabular utilizada no censo americano de 1880 diminuindo a apuração do censo de 7 para 2,5 anos, onde mais tarde sua empresa se tornou a IBM
+
+Harvard Mark 1: Modificações de instruções dinâmicas e Unidade de decisão, algoritmo
+
+ENIAC Formato em U, Memória gigantescas, registradores de 2 pés e 18 mil válvulas e traz o conceito de ser programável com 80 mulheres manipulando os cabos
+
+EDVAC, sucessor do ENIAC tinha programa de armazenamento
+
+Colossus, criado em londres por Allan Turing
+
+Lógica 
+
+definição formal de um problema: 
+
+Problema é uma questão que foge a uma determinada regra, ou melhor é um desvio de percurso, o qual impede de atingir um objetivo com eficiência e eficácia.
+
+Definição formal de lógica
+
+Parte da filosofia que trata das formas do pensamento em geral (dedução, indução, hipótese, inferência, etc...) e das operações intelectuais que visam à determinação do que é verdadeiro ou não.
+
+Lógica é a organização e planejamento das instruções, assertivas em um algoritmo, a fim de viabilizar a implantação de um programa.
+
+Seres humanos podem prever comportamentos, computadores não.
+
+Técnica Linear é um modelo tradicional, não tem vínculo com estrutura hierárquica e nem programação de computadores, a execução é sequenciada e é unidimensional com recursos limitados.
+
+Técnica Estruturada tem a ideia de hierarquia, tras organização, disposição e ordem dos elementos essenciais que compõem um corpo (concreto ou abstrato) ten como objetivo facilitar a escrita, entendimento, validação e manutenção
+
+Técnica Modular se trata em decompor um problema em módulos indetendentes e controlada por um conjunto de regras, em tres partes num modelo padrão, dados de entrada -> processo de transformação -> dados de saída, metas de simplificar, decompor e verificar.
+
+Algoritmo não se opera sozinho e sempre precisa de instruções detalhadas
+
+Algoritmo é um processo de resolução de problemas "step by step" utilizando instruções
+
+Desenvolvimento do programa: 
+ . Análise - estudo e definição dos dados
+ . Algoritmo - descreve o problema por meio de ferramentas narrativas, fluxograma ou pseudo código
+ . Codificação - de acordo com a linguagem de programação escolhida
+ 
+Sequência de passos, execução de tarefas e operações finitas de ações
+
+Como contruir um algoritmo? 
+ . Compreensão do problema
+ . Definir dados de entrada
+ . Definir processamento
+ . Definir dados de saída
+ . Utilizar um método de construção
+ . Teste e diagnóstico
+ 
+Construção de algoritmo
+ . Narrativa
+ . Fluxograma
+ . Pseudocódigo
+ 
+Constante é tudo o que é fixo e inalterável
+
+O que são instruções?
+Definição formal: linguagem de palavras-chave de uma determinada programação que tem por finalidade comandar um computador que irá tratar os dados
+
+Estrutura condicional: simples, composta e encadeada
+
+Vetor é caracterizado por uma variável dimensionada com tamanho pré-fixado.
+
+Matriz é uma tabela organizada em linhas e colunas no formato m x n, onde m representa o número de linhas e n o número de colunas, container
+
+Funções ou subrotinas são blocos de instruções que realizam tarefas específicas, são blocos de instruções identificados por nomes e parâmetros
+
+Programa de alto nível =  prgrama fonte
+Programa de baixo nível = programa objeto
+
+Análise léxica faz a verificação das palavras, particiona, classifica e elimina
+
+Análise sintática é um componente do sistema linguístico que interliga os constituintes da sentença, atribuindo uma estrutura
+
+Análise semântica é o estudo do significado, incide sobre a relação entre significantes como: palavras, frases, sinais e símbolos
+
+O que é um paradigma?
+
+Forma de resolução de problemas com diretrizes e limitações específicas de cada paradigma utilizando linguagem de programação
+
+Um objeto é descrito por caracteristicas específicas, comportamentos e estado
+
+
