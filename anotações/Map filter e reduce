@@ -2,4 +2,97 @@ Map, Filter e Reduce / Stephany nusch
 
 Map 
 
-Map cria um novo array
+ . cria um novo array
+ . não modifica array original
+ . realiza as operações em ordem
+ 
+array.map(callback, thisArgs) 
+callback(item, index, array)
+
+array = [1,2,3,4,5];
+array.map((item) => item * 2 ); // [2,4,6,8,10] = nova array sem apagar a original
+array.forEach((item) => item * 2); // undefined
+
+const apple = { value:2 };
+const orange = { value:3 };
+const nums = [1, 2];
+
+function mapWithThis(arr, thisArg) {
+	return arr.map((item) => item * this.value){
+	}, thisArg);
+}
+
+console.log("this -> apple", mapWithThis(nums, apple)); // [2, 4]
+console.log("this -> orange", mapWithThis()); // [3, 6]
+
+Filter
+ 
+ . cria um novo array de acorco com a condição definida
+ 
+array.filter(callback, thisArgs)
+
+frutas = ["maçã fuji", "maçã verde", "laranja", "abacaxi"];
+frutas.filter((fruta) => fruta.include("maçã")); // ["maçã fuji", "maçã verde"]
+
+function filterPares(arr) {
+	return arr.filter((item) => item % 2 === 0);
+}
+
+function filterImpares(arr) {
+	return arr.filter((item) => item % 2 !== 0);
+}
+
+arrayNums = [1, 33, 55, 67, 30, 2, 4];
+console.log(filterPares(arrayNums)); // [30, 2, 4]
+console.log(filterImpares(arrayNums)); // [1, 33, 55, 67]
+
+Reduce
+
+Executa uma function em todos os elementos do array retornando um único valor
+
+array.reduce(callback, initialValue)
+
+callback function a ser executada a partir do acumulador
+initialValue valor sobre o qual o retorno final irá atuar
+
+const callback = function(accumulator, currentValue, index, array) {}
+
+Accumulator/prevValue acumula todas as chamadas da callback function
+currentValue elemento atual sendo acessado pela function
+
+function sum(arr) {
+	return arr.reduce((prev, current) => prev + current);
+}
+
+const arr = [1, 2];
+
+console.log(sum(arr)); //3
+
+const list = [
+	{name: "sabão em pó", price: 30},
+	{name: "cereal", price: 12},
+	{name: "toalha", price: 30}
+];
+
+const cash = 100;
+
+function calcCash(cash, list) {
+	return list.reduce(function(prev, current, index){
+		console.log("rodada ", index + 1);
+		console.log({ prev });
+		console.log({ current });
+		return prev - current.price;
+	}, cash);
+}
+
+console.log(calcCash(cash, list)); // rodada 1
+								   // { prev: 100 }
+								   // { current: {name: "sabão em pó", price: 30}
+								   // rodada 2
+								   // { prev: 70 }
+								   // { current: {name: "cereal", price: 12}
+								   // rodada 3
+								   // { prev: 58 }
+								   // { current: {name: "toalha", price: 30}
+								   // 28
+								   

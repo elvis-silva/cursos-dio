@@ -1,0 +1,58 @@
+1/5 Quadrado de Pares
+
+let lines = gets().split('\n');
+
+var N = parseInt(lines.shift());
+for (let i = 1; i <= N; i++ ) {
+	if (i % 2 === 0) print(`${i}^2 = ${i**2}`); //escreva sua lógica nos espaços em branco
+}
+_______________________________________________________________________
+
+2/5 Resto 2
+
+let lines = gets().split('\n');
+
+let N = parseInt(lines.shift());
+for (let i = 0; i < 10000;  i++) {
+	if (i%N === 2) print(i);
+}
+_______________________________________________________________________
+
+3/5 Nossos Dias Nunca Voltarão
+
+let lines = gets().split("\n");
+
+let n = parseInt(lines.shift());
+//escreva o seu código aqui
+let str = "LIFE IS NOT A PROBLEM TO BE SOLVED";
+
+print(`${str.substring(0,n)}\n`);
+_______________________________________________________________________
+
+4/5 Tomadas
+
+let lines = gets().split("\n");
+
+let line = lines.shift().split(' ');
+
+//escreva aqui o seu código
+let T1 = parseInt(line[0]);
+let T2 = parseInt(line[1]);
+let T3 = parseInt(line[2]);
+let T4 = parseInt(line[3]);
+let numTomadas = T1 + T2 + T3  + T4 - 3;
+print(numTomadas);
+_______________________________________________________________________
+
+5/5 Polígonos Regulares Simples
+
+let lines = gets().split("\n");
+let line = lines.shift().split(' ');
+
+//continue o seu código aqui
+let N = parseInt(line[0]);
+let L = parseInt(line[1]);
+let P = N * L;
+
+print(P);
+

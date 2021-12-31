@@ -1,0 +1,58 @@
+Manipulando o D.O.M. com JS / Stephany Nusch
+
+BOM = Browser Object Model é tudo o que está no objeto window
+
+Document Object Model
+
+O DOM é um padrão de como acessar e modificar os elementos HTML de uma página
+
+Selecionanto os elementos de uma página
+
+document.getElementById('id-name'); // retorna um único element
+document.getElementsByTagName('tag'); // retorna um array com os elements
+document.getElementsByClassName('class-name'); // retorna um array com os elements
+document.querySelectorAll('.first-class .second-class'); // retorna um array correspondente a verificação solicitada, ex:
+/*[
+	<div class="first-class second-class">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+]*/
+
+Adicionar e deletar
+
+document.createElement('element'); // cria novo element
+document.removeChild('element'); // remove um element
+document.appendChild('element'); // adiciona um element
+document.replaceChild('new', 'old'); // substitui um element
+
+Estilos
+
+element.classList.add('new-style'); // add style
+element.classList.remove('class'); // remove class
+element.classList.toggle('dark-mode'); // add dark-mode or remove dark-mode
+
+colocar css diretamente ex:
+
+document.getElementsByTagName('p').style.color = "blue";
+
+Eventos
+
+ . Ações que o usuário interage com a página
+
+ Mouse Events: mouseover, mouseout
+ 
+ Click Event: click, dbclick
+ 
+ Updates Events: change, load
+ 
+Event Listener é um escutador de eventos
+
+ . diretamente no js cria um evento que vai ser adicionado no momento em que o usuários realizar determinada ação
+ 
+element.addEventListener('click', function);
+
+
