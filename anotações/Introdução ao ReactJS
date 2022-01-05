@@ -1,0 +1,208 @@
+Introdução ao ReactJS 
+
+Bruno Carneiro | Luiza Labs
+
+React é uma linguagem declarativa baseada em componentes
+
+Pode ser utilizada em qualquer lugar
+
+Configuração
+
+React Create App, React Scripts, Task Runners e Bundler Sizers
+
+$ npm init
+$ npm install --save react@ver.si.on react-dom@Ver.si.on react-scripts@ver.si.on
+
+JSX
+
+const element = <h1>Hello</h1>
+
+Não é obrigatório a utilização do JSX no React
+
+O browser não interpreta o JSX, para isso é necessário um transpilador para que a app possa entender o código. ex Babel.
+
+function sum(a, b) {
+	return a + b
+}
+
+function primeiroJSX() {
+	return (
+		<div>
+			Qualquer coisa aqui! HTML normal...
+			<h1>Soma: {sum(10, 20)}</h1>
+		</div>
+	)
+}
+
+const App = () => {
+	return (
+		<div className="App">
+			{primeiroJSX()} // JS sempre entre chaves
+		</div>
+	)
+}
+
+const rootElement = document.getElementById("root")
+ReactDOM.render(<App />, rootElement)
+
+Renderização
+
+Em elementos, React DOM, em nós raíz
+
+React pensa em como a interface deve estar a cada momento ao invés de alterá-la com o tempo, o que faz ter ganho de performance e evita uma série de erros.
+
+Components e props
+
+Componente trabalha em duas formas, function e class
+
+*** Boa prática sempre usar formato CamelCase nos components ***
+
+--- Button.jsx ------------------------
+
+import React from 'react'
+
+function Button(pros) {
+	
+	const {name, onClick} = props
+
+	return (
+		<button onClick={onClick}>{name}</button>
+	)
+}
+
+export default Button
+
+--- index.js ------------------------
+
+import React from "react"
+import ReactDOM from "react-dom"
+import Button from './Button'
+import "./styles.css"
+
+functon sum(a, b) {
+	alert(a + b)
+}
+
+function App() {
+	return (
+		<div className="App">
+			Hello
+			<Button onClick={() => sum(10, 20)} name='Elvis'/>
+		</div>
+	)
+}
+
+const rootElement = document.getElementById("root")
+ReactDOM.render(<App />, rootElement)
+
+----------------------------------
+
+para colocar um componente dentro do outro tem que chamar {props.children}
+
+------------------------------------
+
+Estado e ciclo de vida
+
+Inicialização, montagem, atualização e desmontagem
+
+Nenhum component pai ou filho devem saber se outro component possui estado ou não.
+
+O estado é apenas local ao component e cado seja necessário enviar algum atributo para outro então é feito via props.
+
+------------------------------------
+
+renderizando classe sempre import a Component
+
+import React, { Component } from "react"
+import ReactDOM from "react-dom"
+import "./styles.css"
+
+class App extends Component {
+	constructor(props) {
+		super(props)
+		
+		this.state = {
+			clock: 1000,
+			copo: 'água'
+		}
+	}
+	
+	// altera o estado do copo a cada 3 segundos
+	componentDidMount() {
+		window.setTimeOut(() => {
+			this.setState({
+				copo: 'suco'
+			})
+		}, 3000)
+	}
+	
+	alterarCopo = () => {
+		this.setState({
+			copo: 'refrigerante'	
+		})
+	}
+	
+	render() {
+		const { clock, copo } = this.state
+		return(
+			<div>
+				<h1>{clock}</h1>
+				<button onClick={() => this.alterarCopo()}>{copo}</button>
+			</div>
+		)
+	}
+}
+
+const rootElement = document.getElementById("root")
+ReactDOM.render(<App />, rootElement)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

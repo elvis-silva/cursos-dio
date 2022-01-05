@@ -55,4 +55,48 @@ let L = parseInt(line[1]);
 let P = N * L;
 
 print(P);
+_______________________________________________________________________
 
+1/3 Intervalo
+
+let X = parseFloat(gets());
+
+if (X>=0 && X<=25){print("Intervalo [0,25]");
+
+}else if(X > 25 && X <= 50){print("Intervalo (25,50]");
+
+}else if(X > 50 && X <= 75){print("Intervalo (50,75]");
+
+}else if(X > 75 && X <= 100){print("Intervalo (75,100]");        //complete o código nos espaços em branco
+
+}else{print("Fora de intervalo");
+
+}
+_______________________________________________________________________
+
+2/3 Quanta Mandioca?
+
+let chico = 300 * parseInt(gets());
+let bento = 1500 * parseInt(gets());
+let bernardo = 600 * parseInt(gets());
+let marina = 1000 * parseInt(gets());
+let iara = 150 * parseInt(gets());
+let marlene = 225;
+let total = chico+bento+bernardo+marina+iara+marlene; // Digite aqui o calculo total
+
+print(total);
+_______________________________________________________________________
+
+3/3 Números Ímpares
+
+let lines = gets().split('\n')
+
+let N = parseInt(lines.shift());
+
+//complete o código
+
+for (let i = 1; i <= N; i++) {
+  if(i%2 !== 0) {
+    print(i);
+  }
+}

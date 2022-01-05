@@ -1,0 +1,92 @@
+SQL SERVER - Criando suas primeiras consultas 
+Thiago Campos de Oliveira
+
+SGBDs normaliza os dados
+
+Atomicidade garante que todos os dados estão corretos numa tabela
+
+create table Test
+(
+	Descricao varchar(50) null,
+	Complemento char(10) not null
+)
+
+drop Table //apaga tabela
+
+create table Produtos
+(
+	Codigo int,
+	Nome varchar(100),
+	Descricao varchar(200),
+	Preco float
+)
+
+create table Pedido
+(
+	Codigo int not null,
+	DataSolicitacao datetime not null,
+	FlagPago bit not null,
+	TotalPedido float not null,
+	CodigoCliente int not null
+)
+
+insert into NomeDaTabela (codigo, nome, TipoPessoa) values (1, 'Elvis', 'F');
+
+select NomeDaColuna from NomeDaTabela where TipoPessoa = 'J'
+
+update NomeDaTabela set NomeDaColuna = NovoValor, NomeDaColuna = NovoValor where NomeDaColuna = ValorAtual 
+
+delete from NomeDaTabela where NomeDaColuna in(val1, val2, val3)
+
+Tabela verdade (operadores)
+
+AND true = ALL TRUE | false = 1 FALSE
+OR true = 1 TRUE | false = ALL FALSE
+
+V AND V = V
+V AND F = F
+F AND F = F
+
+V OR V = V
+V OR F = V
+F OR F = F
+
+select * from NomeDaTabela where NomeDaColuna = ValorDaColuna AND NomeDaColuna = ValorDaColuna
+
+select *,
+		case
+			when NomeDaColula = ValorDaColuna then NovoValorColuna
+			when NomeDaColula = ValorDaColuna then NovoValorColuna
+			else Mensagem
+		end
+from NomeDaTabela
+
+convert(varchar, DataDaSolicitacao, 103) // dd/mm/aaaa
+
+chave primária é uma forma de identificar um registro de forma única e performa melhor na busca
+
+chave estrangeira cria relação entre tabelas
+
+chave estrangeira sempre será uma cópia da chave primária de mesmo tipo e de mesma quantidade
+
+select * from Tabela after table Tabela add constraint fk_tabela foreign key (Coluna) references Tabela (Coluna)
+
+normalização 
+
+adicionar coluna
+
+select * from Tabela alter table Tabela add NomeDaColuna tipode dado
+
+inner join, left join, right join // linka tabelas
+
+select * from Tabela apelido inner join OutraTabela outroApelido on apelido Coluna = outroApelido OutraColuna
+
+select * from Tabela apelido left join OutraTabela outroApelido on apelido Coluna = outroApelido OutraColuna where outroApelido.Coluna > 10 //retorna pedidos maior que 10
+
+_______________________________________________________
+
+MODELANDO BD STAR WARS
+
+like 'Dart%' // busca dart + qualquer outra coisa após o nome(%)
+
+

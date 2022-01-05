@@ -1,0 +1,122 @@
+SQL SERVER Boas práticas com banco de dados
+
+Rodrigo Tavares
+
+ORM (Object Relaction Management) componentes utilizados para abstrair consultas de bancos de dados
+
+CREATE TABLE PRODUTOS {
+	CODIGO        INT 		  	NOT NULL,
+	DESCRICAO     VARCHAR(50) 	NOT NULL,
+	DATA_VALIDADE DATETIME,
+	EAN			  VARCHAR(15)	NOT NULL,	
+	IND_INATIVO   INT         	NOT NULL DEFAULT 0
+}
+;
+
+inserindo primary key na tabela produtos indicando o código como chave
+
+ALTER TABLE PRODUTOS
+	ADD CONSTRAINT PK_PRODUTOS
+		PRIMARY KEY (CODIGO)
+;
+		
+criando um índice para pesquisa rápida na tabela produtos
+
+CREATE INDEX IDX_PRODUTOS_EAN
+		ON PRODUTOS(EAN)
+;
+
+inserindo produto na tabela sem os campos
+
+INSERT INTO PRODUTOS VALUES (
+	1, 
+	'Produto 1', 
+	GETDATE(), 
+	'123456789', 
+	0
+)
+;
+
+inserindo produto na tabela indicando os campos a serem preenchidos
+
+INSERT INTO PRODUTOS(CODIGO, DESCRICAO, EAN) 
+			VALUES (2, 'Produto 2', '1234567890')
+;
+			
+ver todos os produtos
+
+SELECT * FROM PRODUTOS
+
+	| CODIGO | DESCRICAO | DATA_VALIDADE           | EAN        | IND_INATIVO
+ 1	| 1		 | Produto 1 | 2022-01-04 18:55:09.600 | 123456789  | 0			
+ 2  | 2      | Produto 2 | NULL					   | 1234567890 | 0
+ 
+ver determinado produto
+
+SELECT * FROM PRODUTOS WHERE CODIGO = 2
+
+contar quantos registros tem na tabela
+
+SELECT COUNT(*) AS TOTAL FROM PRODUTOS
+
+criar tabela loja
+
+CREATE TABLE LOJAS (
+	CODIGO      INT         NOT NULL,
+	NOME 	    VARCHAR(50) NOT NULL,
+	IND_INATIVO INT         NOT NULL DEFAULT 0,
+	CONSTRANT PK_LOJAS PRIMARY KEY (CODIGO)
+)
+;
+
+criar tabela estoque
+
+CREATE TABLE ESTOQUE (
+	CODIGO_PRODUTO INT     NOT NULL,
+	CODIGO_FILIAL  INT     NOT NULL,
+	QUANTIDADE 	   DECIMAL NOT NULL DEFAULT 0,
+	CONSTRAINT PK_ESTOQUE PRIMARY KEY(CODIGO_PRODUTO, CODIGO_FILIAL)
+)
+;
+
+criando uma chave estrangeira relacionada a outra tabela, proibindo essa tabela de criar itens que não se casam com os dados
+
+ALTER TABLE ESTOQUE
+	ADD CONSTRAINT FK_ESTOQUE_PRODUTOS
+		FOREIGN KEY (CODIGO_PRODUTO)
+			REFERENCES PRODUTOS(CODIGO)
+;
+
+ALTER TABLE ESTOQUE
+	ADD CONSTRAINT FK_ESTOQUE_LOJAS
+		FOREIGN KEY (CODIGO_FILIAL)
+			REFERENCES LOJAS(CODIGO)
+;
+
+depois de ter criado a relação entre as tabelas basta pesquisar assim:
+
+SELECT E.CODIGO_FILIAL,
+	   L.NOME,
+	   E.CODIGO_PRODUTO,
+	   P.DESCRICAO,
+	   E.QUANTIDADE
+	FROM ESTOQUE E INNER JOIN LOJAS L
+		ON E.CODIGO_FILIAL - L.CODIGO
+	INNER JOIN PRODUTOS P
+		ON E.CODIGO_PRODUTO = P.CODIGO
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
