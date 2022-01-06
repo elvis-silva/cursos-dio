@@ -2,7 +2,7 @@ Introdução ao ReactJS
 
 Bruno Carneiro | Luiza Labs
 
-React é uma linguagem declarativa baseada em componentes
+React é uma linguagem declarativa baseada em componentes, não imperativa
 
 Pode ser utilizada em qualquer lugar
 
@@ -156,26 +156,321 @@ class App extends Component {
 const rootElement = document.getElementById("root")
 ReactDOM.render(<App />, rootElement)
 
+------------------------------------------------
+
+Webpack é um module bundler, um empacotador de módulos para aplicações JS
+
+Principais conceitos do webpack
+
+ . Entry -  Utilizando grafo, o webpack precisa de um ponto de entrada para buscar todos os módulos e dependências.
+ 
+ . Output - é para determinar quais são os bundlers que o webpack irá emitir
+ 
+ . Loaders - é para permitir que o webpack gerencie arquivos não JS
+ 
+ . Plugins - podem ser utilizados para otimizar pacotes, minificação, injeção de scripts e mais
+ 
+ . Mode - utilizado para abordagem de configuração zero. É possivel configurar módulos como production, development ou none.
+ 
+ Production trás otimização interna
+ 
+ Development é executado com 3 plugins: UglifyJsPlugin, ModuleConcatenationPlugin e NoEmitOnErrorsPlugin
+ 
+ Criação do arquivo webpack
+ 
+$ npm i -D webpack webpack-cli
+
+"build":"webpack --mode production"
+
+$ npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+
+--- webpack.config.js -----------------------------
+
+const path = require('path')
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+
+module.exports = {
+	devtool: 'source-map',
+	entry: './src/index.js',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'bundler.js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader"
+				}
+			}
+		]
+	},
+	resolve: {
+		extensions: ['.js', '.jsx'],
+	},
+	plugins: [
+		new HtmlWebPackPlugins({
+			template: "./src/index.html",
+			filename: "./index.html"
+		})
+	]
+}
+
+---- .babelrc ----------------------------------
+
+{
+	"presets": [
+		"@babel/preset-env",
+		"@babel/preset-react"
+	]
+}
+
+---------------------------------------------------
+
+Criando um dev server
+
+npm i -D webpack-dev-server
+
+em package.json add em scripts block:
+
+"scripts": {
+	"start:dev":"webpack-dev-server"
+}
+
+---------------------------------------------------
+
+EsLint
+
+$ npm install --save-dev eslint babel-eslint eslint-plugin-react eslint-watch
+
+executar eslint
+
+$ npm run eslint
+
+---------------------------------------------------
+
+Renderização condicional
+
+Em react você pode criar componentes distintos que encapsulam o comportamento que você precisa. Então você pode renderizar apenas alguns dos elementos dependendo do estado da sua app.
+
+ . variáveis de elementos
+ . if inline com operador lógico &&
+ . if-else inline com operador condicional
+ . evitando que um componente seja renderizado
+ 
+---- App.jsx ----- if (&&) ---------------------------------
+
+import React from 'react';
+
+const btnA = <button>Botão A</button>
+const btnB = <button>Botão B</button>
+
+const hasCustomer = true; // case false não mostra o botão
+
+const App = () => {
+	return (
+		<div>
+			<p>Paragrafo qualquer</p>
+			{hasCustemer && (
+				<div>
+					Clique no botão abaixo
+					<br />
+					{btnA}
+				</div>
+			)}
+		</div>
+	);
+};
+export default App;
+
+---- App.jsx ----- if-else (?:) ---------------------------------
+
+import React from 'react';
+
+const btnA = <button>Botão A</button>
+const btnB = <button>Botão B</button>
+
+const hasCustomer = false; // true mostra btnA, false mostra btnB
+
+const renderBtnA = (
+	<div>
+		{btnA}
+	</div>
+)
+
+const renderBtnB = (
+	<div>
+		{btnB}
+	</div>
+)
+
+const App = () => {
+	return (
+		<div>
+			<p>Paragrafo qualquer</p>
+			{hasCustemer ? renderBtnA : renderBtnB}
+		</div>
+	);
+};
+export default App;
+
+---- App.jsx ----- evitando renderizar component -------------------
+
+import React from 'react';
+
+const btnA = <button>Botão A</button>
+const btnB = <button>Botão B</button>
+
+const hasCustomer = false; // true mostra btnA, false mostra btnB
+
+const renderBtnA = (
+	<div>
+		{btnA}
+	</div>
+)
+
+const renderBtnB = (
+	<div>
+		{btnB}
+	</div>
+)
+
+// não renderiza componente se false
+const showCustomer = () => {
+	if(!hasCustomer) return null;
+	
+	return (
+		<div>
+			<p>paragrafo exemplo</p>
+		</div>
+	)
+}
+
+const App = () => {
+	return (
+		<div>
+			<p>Paragrafo qualquer</p>
+			{hasCustemer ? renderBtnA : renderBtnB}
+			<div>
+				{showCustomer()}
+			</div>
+		</div>
+	);
+};
+export default App;
+
+----- LISTAS E CHAVES  --------------------------
+
+chaves devem ser únicas apenas entre elementos irmãos
 
 
+---- App.jsx ------ Array ---------------------------
 
+import React from 'react';
 
+const myList = [
+	{
+		id: 1,
+		name: 'Primeiro'
+	},
+	{
+		id: 2,
+		name: Segundo
+	},
+	{
+		id: 3,
+		name: Terceiro
+	},
+]
 
+const App = () => {
 
+	const renderList = (item, index) => {
+		return (
+			<li key={`list-${item.id}`}>{item.name}</li>
+		)
+	}
+	
+	return {
+		<div>
+			<ul>
+				{myList.map(renderList)}
+			</ul>
+		</div>
+	}
+}
+export default App;
 
+---- EVENTOS -------------------------------------
 
+Manipular eventos em elementos react é muito semelhante a manipular eventos e, elementos do DOM. Existem algumas diferenças sintáticas:
 
+ . Eventos em React são nomeados usando camelCase ao invés de letras minúsculas
+ 
+ . com o jsx você passa uma function como manipulador de eventos ao invés de textos
+ 
+---- App.jsx --------------------------------------
 
+import React from 'react'
 
+const clientList [
+	{
+		id: 1,
+		name: "Primeiro"
+	},
+	{
+		id: 2,
+		name: "Segundo"
+	},
+	{
+		id: 3,
+		name: "Terceiro"
+	}
+]
 
+const App = () => {
 
+	const handleClick = (e, id) => {
+		console,log(`ID do cliente ${id}`);
+	}
+	
+	const renderClients = (client, index) => {
+		return (
+			<div key={`cliente-${client.id}`}>
+				<li>{client.name} <button onClick={(e) => handleClick(e, client.id)}>Deletar</button></li>
+			</div>
+		)
+	}
+	
+	const handleChange = (e) => {
+		const { value } = e.target
+		console.log(value)
+	}
+	
+	return (
+		<div>
+			<input onChange={handleChange}>
+			<div>
+				<ul>
+					{clientList.map(renderClients)}
+				</ul>
+			</div>
+		</div>
+	)
+}
+return default App;
 
+----- Pensando do jeito React ----------------------
 
-
-
-
-
-
+ . Comece com um Mock
+ . Separe a UI em uma hierarquia de components
+ . Crie uma versão estática em React
+ . Identifique a representação mínima, mas completa, do state da ui
+ . identifique onde o state deve ficar
+ . adicione fluxo de dados inverso
+ 
 
 
 

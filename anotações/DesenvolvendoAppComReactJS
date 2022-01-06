@@ -1,0 +1,650 @@
+Desenvolvimento de app para internet com ReactJS
+
+Eduardo Gonçalves Costa
+
+Maneira de estilização
+ . Inline
+ . Classes
+ . CSS in JS
+ 
+---- Inline ---------
+
+Prós
+ . Maneira mais prática e direta
+ . Ajustes rápido
+ . Testes de estilo
+
+Contra
+ . Difícil manutenção
+ 
+ 
+const divStyle = {
+	color: 'blue',
+	backgroundImage: 'url(' + imgUrl + ')'
+};
+function MyComponent() {
+	return <div style={divStyle}>My Component</div>
+}
+
+function App() {
+	return (
+		<MyComponent style={{ marginTop: '10px' }} />
+	)
+}
+
+
+---- Classes ---------------
+
+Em JSX Define-se classes pelo atributo cassName
+
+Prós
+ . Maneira mais prática e direta
+
+Contra
+ . Difícil manutenção
+ . Pouca flexibilidade
+ . conflito com nomes
+  
+  
+  -- styles.css ---
+  
+.div-style {
+	color: blue;
+	background: url('');
+}
+
+ -- MyComponent.jsx ---
+ 
+import './styles.css';
+
+function MyComponent() {
+	return <div className="div-style">My Component</div>
+}
+
+
+--- CSS in JS ------------------
+
+$ npm install --save styled-components
+
+. Manutenção
+  . Facilidade para remover CSS
+  . Estilos dinâmicos
+. Performance
+. Injeção automática de prefixos vendor
+
+
+ const DivStyle = styled.div`
+	color: blue;
+	background: url('${props => props.imageUrl}');
+ `;
+
+ function MyComponent() {
+	const url = 'caminho/do/arq';
+	return <DivStyle imageUrl={url}>My Component</DivStyle>
+ }
+
+
+ --- Stateful vs stateless -------------------------------
+
+ stateful = component usa state
+
+ stateless = component não usa state
+
+ -- Stateful
+ 
+ . Possui gerenciamento de estados no component
+ . construído usando classes em js
+ 
+ . Ciclo de vida: Init, Mount, Update, Unmout
+ 
+ --- TodoListStatefull.jsx ------------------------------
+ 
+ import React, { Component } from 'react';
+ 
+ class TodoListStatefull extends Component {
+ 
+ 	constructor(props) {
+ 		super(props);
+ 		this.state = {
+ 			items: [
+ 				'Tomate',
+ 				'Alface',
+ 				'Melancia'
+ 			]
+ 		}
+ 	}
+ 	
+ 	addItem = (item) => {
+ 		this.setState({ items: [...this.state.items, item] });
+ 	}
+ 	
+ 	removeItem = () => {
+ 		this.setState({ items: [...this.state.items.slice(1)] });
+ 	}
+ 	
+ 	render() {
+ 		const { items } = this.state;
+ 		
+ 		return (
+ 			<div className="bloco-lista">
+ 				<p>Minha Lista</p>
+ 				<ul className="lista-estilizada">
+ 					{items.map(item => <li>{item}</li>)}
+ 				</ul>
+ 				<button onClick={() => this.addItem('Abobora')}>Add Item</button>
+ 				<button onClick={() => this.removeItem()}>Del Item</button>
+ 			</div>
+ 		)
+ 	}	
+ }
+ 
+ export default TodoListStatefull;
+ 
+ --------------------------------------------------------
+ 
+ -- Stateless
+ 
+ . Não possui gerenciamento de estados no componente
+ . construído usando functions um JS
+ 
+ . Nomeação atualizada
+  . Class Components
+  . Function Components
+ . Com hooks estados são manipuláveis em function components
+ 
+ --- TodoListStateless.jsx ------------------------------
+ 
+ import React from 'react';
+ 
+ const TodoListStateless = ({items}) => (
+ 	<div className="bloco-lista">
+ 		<p>Minha Lista</p>
+ 		<ul className="lista-estilizada">
+ 			{items.map(item => <li>{item}</li>)}
+ 		</ul>
+ 	</div>
+ );
+ 
+ export default TodoListStateless;
+
+ --------------------------------------------------------
+ 
+ Com Hooks
+ 
+ --- TodoListFuncional.jsx ------------------------------
+ 
+ import React, { useState } from 'react';
+ 
+ const TodoListFuncional = () => {
+
+ 	const [items, setItems] = useState(['Tomate','Alface','Melancia']);
+ 	
+ 	const addItem = (item) => {
+ 		setItems([..items, item]);
+ 	}
+ 	
+ 	const removeItem = () => {
+ 		setItems([...items.slice(1)]);
+ 	}
+ 	
+ 	return (
+ 		<div className="bloco-lista">
+ 			<p>Minha Lista</p>
+ 			<ul className="lista-estilizada">
+ 				{items.map(item => <li>{item}</li>)}
+ 			</ul>
+ 			<button onClick={() => addItem('Abóbora')}>Add Item</button>
+ 			<button onClick={() => removeItem()}>Del Item</button>
+ 		</div>
+ 	);
+ }
+ 
+ export default TodoListFuncional;
+ 
+ --- Forms -----------------------------------------------------
+ 
+ Formulário mantêm um estado interno
+ 
+ . Em html input, textarea e select tem um estado interno
+ . Em React podemos controlar o estado com state e setState
+ 
+ Componente controlado
+ 
+ . Tanto select, input ou textarea aceitam um atributo value
+ . Podemos mudar esse valor usando o atributo onChange
+ 
+ Componente Não controlado
+ 
+ . A tag input é read-only
+ 
+ --- SorveteForm.jsx -------------------------------------------
+ 
+ import react from 'react';
+ 
+ class SorveteForm extends React.Component {
+ 	constructor(props) {
+ 		super(props);
+ 		this.state = {
+ 			sabor: 'uva',
+ 			casquinha: true,
+ 			guardanapo: 'sim'
+ 		};
+ 		
+ 		this.handleInputChange = this.handleInputChange.bind(this);
+ 		this.handleSubmit = this,handleSubmit.bind(this);
+ 	}
+ 	
+ 	handleInputChange(e) {
+ 		const target = e.target;
+ 		const value = target.type === 'checkbox' ? target.checked : target.value;
+ 		const name = target.name;
+ 		
+ 		this.setState({
+ 			[name]: value
+ 		});
+ 	}
+ 	
+ 	handleSubmit(e) {
+ 		const { sabor, casquinha, guardanapo } = this.state;
+ 		alert('Sabor escolhido: ' + sabor + ', guardanapo ' + guardanapo + , 'casquinha' + casquinha);
+ 		e.preventDefault();
+ 	}
+ 	
+ 	render() {
+ 		return (
+ 			<form onSubmit={this.handleSubmit} style={{display: 'flex', flexDirection: 'column'}}>
+ 				<label>
+ 					Escolha o sabor:
+ 					<select name="sabor" value={this.state.sabor} onChange={this.handleInputChange}>Sabor</select>
+ 					<option value="chocolate">Chocolate</option>
+ 					<option value="coco">Coco</option>
+ 					<option value="limao">Limão</option>
+ 					<option value="morango">Morango</option>
+ 					<option value="uva">Uva</option>
+ 				</label>
+ 				<labe>
+ 					<input type="checkbox" name="casquinha" checked={this.state.casquinha} onChange={this.handleInputChange}/>
+ 					Colocar na Casquinha?
+ 				</label>
+ 				<label>
+ 					Guardanapo?
+ 					<div className="radio">
+ 						<label>
+ 							<input type="radio" id="guardanapo" name="guardanapo" value="sim" checked={this.state.guardanapo === 'sim'} onChange={this.handleInputChange}/>
+ 							sim
+ 						</label>
+ 					</div>
+ 					<div className="radio">
+ 						<label>
+ 							<input type="radio" id="guardanapo" name="guardanapo" value="nao" checked={this.state.guardanapo === 'nao'} onChange={this.handleInputChange}/>
+ 							não
+ 						</label>
+ 					</div>
+ 				</label>
+ 				<input type="submit" value="Enviar"/>
+ 			</form>
+ 		);
+ 	}
+ }
+ 
+ export default SorveteForm;
+ 
+ ---------------------------------------------------------------
+ 
+ Flux
+ 
+ Arquitetura feita para comunicação entre componentes
+ . é um padrão de projeto para tráfego de dados de maneira unidirecional
+ 
+ action -> dispatcher -> store -> view -> action -> ...
+ 
+ . ACTION é como um telégrafo que formata a mensagem a ser enviada
+ . DISPATCHER é como um telefonista que sabe todos os callbacks para diferentes Stores
+ . STORE é como um gerente super controlador que guarda todos os estados e altera esses estados, mais ninguém
+ . VIEW é como um gerente intermediário (middleware) que recebe as notificações da store e passa os dados para as views abaixo dela.
+ 
+ . Servem para comunicação entre os componentes
+ . Centralizam informações
+ 
+ 
+ ---------------------------------------------------------------
+ 
+ Redux é uma implementação de FLUX
+ 
+ $ npm install react-redux
+ $ npm install --save-dev redux-devtools
+ 
+ tem 3 princípios:
+ . Uma única store
+ . state é read-only
+ . mudanças feitas com pure functions
+ 
+ Em Redux :
+ 
+ . Actions são como flux
+ . Diferença: actions não enviam a action em si para o dispatcher
+ . Retornam um objeto de action formatado
+ 
+ Store
+ 
+ . Em Flux: diversas stores
+ . Em Redux uma única store
+ . A Store aqui cuida de toda a árvore de estados
+ . Os reducers que cuidam de descobrir qual estado muda
+ 
+ Reducers
+ 
+ . Em Redux não há dispatcher (simplifica e divide o trabalho da store)
+ . A store se conecta ao root reducer que divide os estados em pequenos reducers para descobrir como lidar com esse estado
+ . Os estados aqui são imutáveis
+ 
+ Views
+ 
+ Em React adiciona na camada de View 3 novos conceitos para conectar a View a store:
+ 
+ . Provider
+ . connect()
+ . selector
+ 
+ ---------------------------------------------------------------
+ 
+ Fetch API
+ 
+ ---- GET -----------------------
+ 
+ fetch('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras')
+ .then(response => response.json())
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ ---- POST -----------------------
+ 
+ const novaCientista = {nome: 'Heleieth', area: 'Letras'};
+ fetch('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras', { 
+ 	method: 'post',
+ 	body: JSON.stringify(novaCientista)
+ })
+ .then(response => response.json())
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ ---- DELETE ---------------------
+ 
+ fetch('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras/4', { 
+ 	method: 'delete'
+ })
+ .then(response => response.json())
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ ---- PUT -------------------------
+ 
+ const novaCientista = {nome: 'Heleieth', area: 'Letras'};
+ fetch('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras/3', { 
+ 	method: 'put',
+ 	body: JSON.stringify(novaCientista)
+ })
+ .then(response => response.json())
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ ---------------------------------------------------------------
+ 
+ AXIOS
+ 
+ $ yarn add axios
+ 
+ . LIB DE HTTP API
+ . Cross-browser
+ . Pode monitorar o progresso de um request
+ . Melhor tratamento de erros
+ . Melhor teste
+ 
+ import axios from 'axios';
+ 
+ --- GET ---
+ 
+ axios.get('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras)
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ --- POST ---
+ 
+ axios.post('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras, {
+ 	nome: 'Nome da Cientista',
+ 	area: 'letras'
+ })
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ --- DELETE ---
+ 
+ axios.delet('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras/id)
+ .then(data => {
+ 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+ })
+ .catch(error => {
+ 	alert('Ops! Descrição do erro: ' + error);
+ });
+ 
+ --- PUT ---
+ 
+ useEffect(() => {
+	 axios.put('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras/id, {
+	 	nome: 'Nome da Cientista',
+	 	area: 'letras'
+	 })
+	 .then(data => {
+	 	alert(`Conheça algumas cientistas brasileiras: ${data}`);
+	 })
+	 .catch(error => {
+	 	alert('Ops! Descrição do erro: ' + error);
+	 });
+ }, []);
+ 
+ -------------------------------------------------------------------------
+ 
+ Imutabilidade e Redux
+ 
+ . Uma vez criada uma coleção não pode ser alterada
+ . Novas coleções podem ser criadas a partir de uma coleção anterior e uma mutação (setter) como um conjunto
+ . Novas coleções são criadas usando o máximo possível da estrutura original, reduzindo a cópia e aumentando a performance
+ 
+ Benefícios
+ 
+ . Performance
+ . Programação mais simples
+ . Debugging mais simples (detecção de mudanças)
+ 
+ Se você quer performance em react use dados imutáveis usando shouldComponentUpdate ou React.PureComponent
+ 
+ Imutabilidade é um pré requisito no Redux
+  . Redux e React-redux utilizam comparações rasas
+  . Manipulação de dados mais segura
+  . Time-travel debugging
+ 
+ Os reducers dividem o objeto de estados em domínios por uma chave
+ combineReducers checa mudanças usando comparação rasa
+  . Fazem a interação nos reducers
+  . Criam um novo objeto de estados a partir dos estados retornados por cada reducer
+  
+ Connect gera componentes que fazem comparação rasa com o estado root
+ Retorna o valor para a function mapStateToProps verificando aqueles que precisam de uma operação de re-render
+ 
+ --------------------------------------------------------------------
+ 
+ Redux + Rest
+ 
+ Redux Middlewares
+ 
+ . Provê uma camada entre o disparo de uma ação e o momento que ela atinge o reducer
+ . Utilizados para uma variedade de functions entre elas chamadas de API de serviço
+ 
+ const logger = store => next => action => {
+ 	console.log('dispatching', action);
+ 	let result = next(action);
+ 	console.log('next state', store.getState();
+ 	return result;
+ }
+ 
+ const crashReporter = store => next => action => {
+ 	try {
+ 		return next(action);
+ 	} catch (err) {
+ 		console.error('Caught an exception!', err);
+ 		Raven.captureException(err, {
+ 			extra: {
+ 			 action,
+ 			 state: store.getState()
+ 			}
+ 		})
+ 		throw err;
+ 	}
+ }
+ 
+ import { createStore, combineReducers, applyMiddleware } from 'redux'
+ 
+ const todoApp = combineReducers(reducers);
+ const store = createStore(
+ 	todoApp,
+ 	applyMiddleware(logger, crashReporter)
+ );
+ 
+ Redux Thunk é uma function que chama outra function
+ 
+ $ yarn add redux-thunk
+ 
+ --------------------------------------------------------------
+ 
+ Testes 
+ 
+ $ yarn add --dev @testing-library/react
+ $ yarn add --dev @testing-library/jest-dom/extend-expert
+ 
+ TDD = Test Drive Development
+ . Antecipar erros a nível de desenvolvimento
+ 	. Testes escritos antes da funcionalidade
+ . Não descarta a presença de um tester
+ 
+ describe, it, expected
+ 
+ BDD = Behavior-driven development
+ . Teste de especificação
+  	. Une especificação, teste automatizado e premissa de teste (doc de teste)
+ 
+ BDD e sintaxe Gherkin
+ 
+ $ yarn add --dev jest-cucumber
+ 
+ . sintaxe de steps para definir cenários
+ . descreve cada funcionalidade por features (caso de uso)
+ 
+ Funcionalidade: Login
+ 	Texto com a descrição da funcionalidade
+ 	
+ Cenário: Como um usuário válido posso me logar no sistema
+ 	Dado ...
+ 	Quando ...
+ 	E ...
+ 	Então ...
+ 
+ given, when, then
+ 
+ vscode cucumber extension
+ 
+ -------------------------------------------------------------------
+ 
+ Debugging
+ 
+ Depuração é o processo de encontrar e reduzir defeitos em um software
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ sobre redux a action
+ 
+ todos os tests cnst x
+ 
+ 
+ sobre stateful supondo
+ 
+
+
+flux as actions
+
+
+
+sobre css a biblioteca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
