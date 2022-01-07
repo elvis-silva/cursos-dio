@@ -1,0 +1,58 @@
+Introdução ao C# e .NET
+
+Giovanna Ramos
+
+O que é .net
+
+É um framework criado pela Microsoft que permite a comunicação entre vária linguagens que tem um estrutura comum (CLI) entre elas Visial Basic, c++, F# e C#
+
+O que é C#
+
+Linguagem orientada a objetos fortemente tipada baseada em c++ com influência em Pascal e Java
+
+Uma solução é um container para organizar os projetos relacionados
+
+Os diretórios e arquivos do projeto podem ser vistos pelo gerenciador de soluções que pode ser acessado pelo menu exibir
+
+No gerenciador de soluções podemos adicionar mais projetos, classes, diretórios e mexer no projeto de forma geral
+
+namespaces são usados para organizar as classes
+
+Para usar uma classe de outro namespace colocamos using no começo do código
+
+-- Classe ----
+
+Uma classe por ter campos, propriedades, métodos e eventos que são chamadas de membros
+
+class Animal 
+{
+	public string Nome { get; set; }
+	public int Idade { get; set; } 
+}
+
+Quando uma classe é instanciada, essa instância é chamda de objeto, e nesse objeto podem ser criados os valores de acordo com os campos da classe
+
+-- Interface ----
+
+Classe base que serve de molde para várias classes.
+
+Uma classe que implementa a interface deve implementar obrigatoriamente todos os seu membros
+
+-- Enum ----
+
+Declara um conjunto de constantes nomeadas que começam do 0 e aumenta de 1 em 1
+
+enum Estacao 
+{
+	primavera, verao, outono, inverno
+}
+
+var e1 = (Estacao)0;
+	ou
+Estacao e2 = Estacao.verao
+
+-- Debugging ----
+
+A depuração pode ser feita colocando um Breakpoint no canto esquerdo do código ou apertando f9, então o código para no local indicado pelo breakpoint para poder ser inspecionado.
+
+

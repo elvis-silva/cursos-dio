@@ -1,0 +1,41 @@
+Introdução a microsserviços com .NET
+
+ ---- Microserviços --------
+ 
+ Monolitos
+ 
+ . Rápido e fácil para iniciar
+ . Infraestrutura simples
+ . debug fascinante
+ 
+ ---- escalabilidade vertical ------
+ 
+ . colocar cpu e ram
+ 
+ ---- escalabilidade horizontal ----
+ 
+ . usa um load balance
+ 
+ ---- escalabilidade horizontal com microserviços ----
+ 
+ . Api manager - load balance
+ 
+ ---- Manifesto ágil ----------------------
+ 
+ . Dev Ops
+ 	. plan,code,build,test,release,deploy,operarat,monitor,plan ...
+ 	
+ Microserviços dependem apenas um do outro via apis públicas
+ 
+ Microserviços podem e devem ser poliglotas em seus stacks
+ 
+ Microserviços Encapsula estado e comportamento
+ 
+ Microserviços possuem deploy idependente
+ 
+ Microserviços devem ter tratamentos isolados a falhas
+ 
+ API pública é o ponto de conversão
+ 
+ 
+ 
