@@ -1,0 +1,216 @@
+ Fundamentos de Coleções e LINQ com .NET
+
+ Leonardo Buta
+
+ System.Console.WriteLine("Encontrei o valor {0}", val); //Encontrei o valor val 
+
+ --- Array -----------------
+ 
+ Estrutura de dados que armazenas valores de mesmo tipo, com tamanho fixo
+ 
+ int[] array = new int[4];
+ int[] array = new int[]{1,2,3,4};
+ string[] nome = {"nome 1", "nome 2"};
+ 
+ index é a posição do array e sempre começa por 0
+ 
+ array pode ser multidimencional
+ 
+ int[,] array = new int[linhas, colunas]
+ 
+ acessar: array[1, 1]
+ 
+ ex: 
+ 
+ int[,] matriz = new int[4, 2] 
+ {				//			   Coluna
+ 	{1, 1},     // linha 1     	1, 2
+ 	{2, 2},		// linha 2     	1, 2 		
+ 	{3, 3},		// linha 3     	1, 2
+ 	{4, 4}		// linha 4     	1, 2
+ };
+ 
+ . matriz.GetLenght(0) pega quantidade de linhas
+ . matriz.GetLenght(1) pega quantidade de colunas
+ 
+ Para ordenar um array existem diversos algoritmos para diversos cenários
+ 
+ -- bubble sort 
+ 
+ for(int i = 0; i < array.length; i++) 
+ {
+   	for(int j = 0; j < array.length - 1; j++)
+  	{
+  		if(array[j] > array[j + 1]) 
+  		{
+  			temp = array[j + 1];
+  			array[j + 1] = arra[j];
+  			array[j] = temp
+  		}
+  	}
+ }
+ 
+ Array é uma classe do c# que nos oferece diversos métodos que nos auxilia
+ 
+ Array.Sort(array);
+ 
+ Array.Copy(array, novoArray, array.length);
+ 
+ Array.Exists(array, element => element == valor);
+ 
+ Array.TrueForAll(array, element => element > valor);
+ 
+ Array.Find(array, element => element == valor);
+ 
+ Array.IndexOf(array, valor);
+ 
+ Array.Resize(array, novoTamanho);
+ 
+ Array.ConvertAll(array, element => element.ToString());
+ 
+ --- Coleções Genéricas -----------------
+ 
+ No c# existem classes de coleções que agrupam valores, e essas classes são padronizadas para as coleções mais comuns:
+ 
+ . Ordenar
+ . Obter valor do index
+ . Obter valor com expressão
+ . Trabalhar com tamanhos dinâmicos
+ 
+ System.Collections.Generic
+ 
+ Uma coleção genérica é útil quando cada item na coleção tem o mesmo tipo de dado. Uma coleção genérica impõe tipagem forte, permitindo que apenas o tipo de dados desejado seja adicionado.
+ 
+ . Dictionary<TKey, TValue>
+ . List<T>
+ . Queue<T>
+ . SortedList<TKEY, TValue>
+ . Stack<T>
+ 
+ List<string> estados = new List<string>(){"BA", "MG"};
+ estados.Add("SP");
+ 
+ estados.Count
+ 
+ foreach(var item in estados) 
+ {
+ 	...
+ }
+ 
+ estados.Remove("SP");
+ 
+ estados.addRange(array); // add novos elementos de uma array de mesmo tipo
+ 
+ estados.Insert(1, "RJ"); // add RJ ao índice 1
+ 
+ --- Coleções específicas ----------------
+ 
+ As coleções específicas implementam regras para sua ordem de acesso e manipulação de seus elementos
+ 
+ . Queue (Fila): Obedece a ordem FIFO (First In First Out)
+ . Stack (Pilha): Obedece a ordem LIFO (Last In First Out)
+ 
+ Queue<string> fila = new Queue<string>();
+ fila.Enqueue("SP"); // add item na fila
+ fila.Dequeue(); // remove da fila
+ fila.Peek(); // retorna o primeiro da fila
+ fila.Count;
+
+ Stack<string> pilha = new Stack<string>();
+ pilha.Push("SP"); // add ao topo da pilha
+ pilha.Pop(); // remove o último da pilha
+ pilha.Pick(); // retorna o último da pilha
+ pilha.Count;
+ 
+ ---- Dicionário ------------------------
+ 
+ Tipo de coleção de chave e valor, onde a chave é de valor único e armazenada em hash
+ 
+ Dictionary<key, value> dic = new Dictionary<key, value>();
+ dic.Add("SP", "São Paulo");
+ 
+ foreach(KeyValuePair<key, value> item in dic)
+ {
+ 	var k = item.Key;
+ 	var v = item.Value;
+ }
+ 
+ dic[key]; // retorna o valor do item relacionada a key
+ dic[key] = novoValor; // altera o valor do item relacionado a key
+ dic.Remove(key); // remove o item relacionado a key
+ dic.TryGetValue(key, out TValue value);
+ 
+ ---- LINQ -------------------------
+ 
+ Language Integrated Query (LINQ) é uma maneira de você utilizar uma sintaxe de consulta padronizada para coleções de objetos.
+ 
+ int[] nums = new int[6]{5, 10, 8, 3, 6, 12};
+ 
+ . Query sintaxe
+ 
+ IEnumerable<int> numQuery1 =
+ 	from num in nums
+ 	where num % 2 == 0
+ 	orderby num
+ 	select num;
+ 	
+ . Method syntax:
+ 
+ IEnumerable<int> numQuery2 = nums.Where(num => num % 2 == 0).OrderBy(n => n).ToList();
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

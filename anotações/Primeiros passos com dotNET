@@ -1,0 +1,271 @@
+ Primeiros passos com .NET
+
+ Gabriel Faraday 
+
+ O que é .Net
+ 
+ . infraestrutura para desenvolvimento de software
+ 
+ Uma app .NET é desenvolvida para rodar nas seguintes implementações do .NET atraves do .NET Standard
+
+ . .NET Core
+ . .NET Framework
+ . Mono
+ . Universal Windows Plataform (UWP)
+ 
+ Cada implementação inclui um ou mais .NET Runtimes
+ 
+ Linguagens suportada
+ 
+ C#, F# e VB
+ 
+ command nuget é um gerenciador de pacotes
+
+ $ dotnet new console -n NomeDoProjeto
+ 
+ --- C-# ---------------------------
+ 
+ . É uma linguagem elegante, orientada a objeto e fortemente tipada
+ 
+ . Sintaxe similar ao C, C++ ou Java
+ 
+ . Suporta encapsulamento, herança e polimormismo (OO)
+ 
+ . Compilador é o Roslyn
+ 
+ --- Como funciona ---------------
+ 
+ . O código fonte é compilado em uma linguagem intermediária (IL)
+
+ . O código e os recursos de IL são armazenados no disco em um arquivo executável chamado assembly, geralmente .exe ou .dll
+ 
+  Quando o programa c# é executado o assembly é carregado no CLR
+  
+  Em seguita o CLR executa a compilação just in time (JIT) para converter o código IL em instruções de máquina nativas
+  
+  O CLR tbm tem outros serviços:
+   . Garbage Collector
+   . Exception Handler
+   . Resources Manager
+   
+ --- Estrutura de programa --------------
+ 
+ Os principais conceitos organizacionais em c# são:
+ 
+ . programas
+ . namespaces
+ . tipos
+ . membros
+ . assemblies
+ 
+ Programas c# consistem em um ou mais arquivos, declaram tipos que contêm membros e podem ser organizados em namespaces
+ 
+ . Clases e interfaces são tipos
+ 
+ . Campos, métodos, propriedades e eventos são exemplos de membros 
+  
+ Quando os programas c# são compilados eles são fisicamente empacotados em essemblies
+ 
+ os assemblies geralmente tem a extensão exe ou dll, dependendo se são aplicações ou bibliotecas
+ 
+ namespaces encapsula a estrutura do programa
+ 
+ namespace NomeDoProjeto 
+ {
+ 	public class Classe 
+ 	{
+ 		...
+ 	}
+ }
+ 
+ --- Tipos de valor ----------
+ 
+ Variáveis de tipos de valor contêm diretamente seus dados
+ 
+ A variáveis têm sua própria cópia dos dados e não é possível que as operações afetem outra variável (exceto no caso das variáveis de parâmetro ref o out)
+ 
+ Numérico
+ 
+ . sbyte, short, int, long, byte, ushort, unit, ulong
+ 
+ Character Unicode
+ 
+ . char
+ 
+ Pontos Flutuantes
+ 
+ . float, double, decimal
+ 
+ Booleano
+ 
+ . bool
+ 
+ Outros
+ 
+ . enum, struct, nullable
+ 
+ Variáveis de tipos de referância armazenam referências a seus dados
+ 
+ É possível que duas variáveis façam referência ao mesmo objeto e, portanto, que operações em uma variável afetem o objeto referenciado pela outra variável.
+ 
+ Tipos de Classe e Arrays são tipos de referência
+ 
+ . class, object, string, int[], int[,], interface, delegate
+ 
+ --- Instruções -----------------------
+ 
+ Ações de um programa
+ 
+ {
+ 	um bloco permite que várias instruções sejam escritas em contextos
+ }
+ 
+ Declarações de variáveis e constantes
+ 
+ .if, switch, while, for, break, continue, return, throw, try, catch, finally, using
+ 
+ --- Classes e objetos ---------------
+ 
+ Classe são os tipos mais fundamentais no c#
+ 
+ Uma classe é um estrutura de dados que combina estado (campos) e ações (métodos)
+ 
+ Objetos são instâncias de classes
+ 
+ Gabarge desacopla da memória objetos c#. Não é necessário e nem possível desalocar explicitamente objetos em c#.
+ 
+ --- Membros ------------------
+ 
+ Membros de classe podem ser estáticos ou de instância
+ 
+ . Membros estáticos pertencem a classe e membros de instância pertencem ao objeto
+ 
+ Ex. Constantes, variáveis, métodos, propriedades, constructors...
+ 
+ --- Acessibilidade -----------
+ 
+ Cada membro de uma classe tem uma acessibilidade associada, que controla as regiões do texto do programa que podem acessar o membro
+ 
+ . public, protected, internal, private
+ 
+ --- Herança -------------------
+ 
+ Uma declaração de classe pode especificar uma classe base, herdando os membros public, internal e protected da classe
+ 
+ Omitir um especificação de classe base é o mesmo que derivar do tipo object
+ 
+ --- Métodos ------------------
+ 
+ É um membro que implementa uma computação ou ação que pode ser executada por um objeto ou classe
+ 
+ Os métodos podem ter uma lista de parâmetros que representam valores ou referências de variáveis passados para o método, e um tipo de retorn, que especifica o tipo do valor calculado e retornado pelo método
+ 
+ método virtual pode ser sobrescrito pelo herdeiro usando override
+ 
+ --- Structs -------------------
+ 
+ Como as classes structs são estruturas de dados que podem conter membros de dados e membros de ação, mas, diferentemente das classes as structs são tipos de valor e não requerem alocação de heap.
+ 
+ Uma variável de um tipo de struct armazena diretamente os dados da estrutura, enquanto uma variável de um tipo de classe armazena uma referência a um objeto alocado na memória.
+ 
+ . heap = parte da memória que guarda a referência
+ . stack = parte da memória que guarda a classe/objeto
+ 
+ Structs não aceitam herança determinada pelo dev
+ 
+ São úteis para pequenas estruturas de dados que possuem semântica de valor: números complexos, pontos em um sistema de coordenadas ou pares de chave-valor em um dicionário por exemplo
+ 
+ O uso de structs em vez de classes para pequenas estruturas de dados pode fazer uma grande diferença no nímero de alocações de memória
+ 
+ public struct Classe {
+ 	public Classe() 
+ 	{
+ 		...
+ 	}
+ }
+ 
+ Construtores de structs são chamados com o operador new, mas em vez de alocar dinamicamente um objeto no heap gerenciado e retornar uma referência a ele, um constructor struct simplesmente retorna o próprio valor struct (normalmente um um local temporário da stack) e esse valor é copiado conforme necessário.
+ 
+ --- interfaces --------------------
+ 
+ Como se fosse um contrato a ser implementado por classes e structs
+ 
+ Podem conter métodos, propriedades, eventos e indexadores
+ 
+ Não fornece implementações dos membros que define, apenas a assinatura.
+ 
+ Podem empregar heranças múltiplas
+ 
+ interface IInterface: IInfercace2, IInterface5 
+ {
+ 	int Numero();
+ 	void Funcao();
+ }
+ 
+ --- Enum -----------------------
+ 
+ Tipo de valor distinto com um conjunto de constantes nomeadas
+ 
+ São definidas quando precisa definir um tipo que pode ter um conjunto de valores discretos. Usam um dos tipos de valor integral como armazenamento subjacente. Fornecem significado semântico aos valores discretos
+ 
+ enum Cor 
+ {
+ 	Vermelho,
+ 	Verde,
+ 	Azul
+ }
+ 
+ Cada tipo de enum possui um tipo integral correspondente chamado tipo subjacente e quando não declarado explicitamente tem um tipo subjacente int
+ 
+ enum Alinhamento: sbyte
+ {
+ 	Esquerda = -1,
+ 	Centro = 0,
+ 	Direita = 1
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ didática
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
