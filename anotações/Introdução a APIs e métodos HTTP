@@ -1,0 +1,144 @@
+ Introdução a APIs e métodos HTTP
+ 
+ Hugo de Oliveira
+
+ REST Metodologia
+ RESTFUL API que usa o rest
+ 
+ ------------------------------------------------------
+ 
+ Padrões Http Methods
+ 
+  . GET obtem os dados
+  	
+  	. /api/dev/user
+  	
+  . POST Cria um novo registro ou recurso
+  	
+  	. /api/dev/user
+  
+  . PUT Atualiza um registro
+  	
+  	. /api/dev/user/{id}
+  
+  . DELETE Remove um registro
+ 	
+ 	. /api/dev/user/{id}
+ 
+ -----------------------------------------------------
+ 
+ Status code
+ 
+ Geralmente 
+ . 2x Success
+ . 4x Client error
+ . 5x Server side error
+
+ Comuns
+ . 200 OK
+ . 401 Unauthorized
+ . 403 Forbidden
+ . 404 Not Found
+ . 500 Internal server error
+ . 504 Gateway timeout
+ 
+ -----------------------------------------------------
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

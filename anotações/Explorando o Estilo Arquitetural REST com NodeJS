@@ -1,0 +1,174 @@
+ Explorando o Estilo Arquitetural REST com Node.js
+ 
+ Renan Johannsen de Paula / renanjpaula
+ 
+ . Criar aplicação node
+ 
+ $ npm init
+ 
+ . Arquivo principal é o package.json
+ 
+ . Instalar Typescript
+ 
+ $ npm install -g typescript
+ 
+ . Iniciar typescript
+ 
+ $ tsc --init
+ 
+ . tsconfig.json é o arquivo de regras gerais de validação do código
+ 
+ . Quando desenvolve em typescript é feito um transpiler para JS
+ 
+ . Instalar transpilador de ts para js
+ 
+ $ npm install --save-dev @types/node
+ 
+ . Build o project
+ 
+ $ npm run build
+ 
+ > tsc -p .
+ 
+ . express
+ 
+ $ npm install --save express
+ 
+ $ npm install --save-dev @types/express
+ 
+ . Para auxiliar no desenvolvimento ts dentro do node
+ 
+ $ npm install --save-dev ts-node-dev
+ 
+ . modo de desenvolvimento
+ 
+ $ npm run dev
+ 
+ . Express é um gerenciador de rotas http
+ 
+ . Pacote de status code
+ 
+ $ npm install --save http-status-code
+ 
+ --- index.ts ---------------------
+ 
+ import express, { Request, Response, nextFunction } from 'express';
+ import usersRoute from './routes/users.route';
+ 
+ const app = express();
+ 
+ app.use(express.json());
+ app.use(express.urlencode({ extended: true }));
+ 
+ app.use(usersRoute);
+ 
+ app.get('/status', (req: Request, res: Response, next: nextFunction) => {
+ 	res.status(200).send({ foo: 'bar' });
+ });
+ 
+ app.listen(3000, () => {
+ 	console.log('Aplicação executando na porta 3000!');
+ });
+ 
+ --- users.route.ts ------------------
+ 
+ import { Router, Request, Response, NextFunction } from 'express';
+ import { StatusCode } from 'http-status-code';
+ 
+ const usersRoute = Router();
+ 
+ usersRoute.get('/users', (req: Request, res: Response, next: NextFunction) => {
+ 	const users = [{ userName: 'Elvis' }];
+ 	res.status(StatusCode.OK).send(users);
+ });
+ 
+ usersRoute.get('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NextFuntion) => {
+ 	const uuid = req.params.uuid;
+ 	res.status(StatusCode.OK).send({ uuid });
+ });
+ 
+ usersRoute.post('/users', (req: Request, res: Response, next: nextFunction) => {
+ 	const newUser = req.body;
+ 	res.status(StatusCodes.CREATED).send(newUser);
+ });
+ 
+ usersRoute.put('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NestFunction) => {
+ 	const uuid = rep.params.uuid;
+ 	res.status(StatusCode.OK).send({ uuid });
+ });
+ 
+ usersRoute.delete('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NextFunction) -> 
+ 	res.sendStatus(StatusCode.OK);
+ {});
+ 
+ export default usersRoute;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,161 @@
+ Trabalhando com Branches no GitHub
+
+ Otávio Reis
+ 
+ visualizing-git (app)
+ 
+ index = stage area
+ 
+ não existe branch sem commite e vise-versa
+ 
+ Add repo local ao remoto
+ 
+ $ git remote add origin link-do-repo
+ 
+ Mover entre as branch [-b já cria nova-branch, se branch existe não precisa -b]
+ 
+ $ git checkout -b nova-branch
+ 
+ Mergiar branchs
+ 
+ $ git merge nova-branch
+ 
+ Listar e mostrar as branchs locais
+ 
+ $ git branch
+ 
+ Trocar nome da própria branch
+ 
+ $ git branch -m novo-nome-da-branch
+ 
+ Trocar nome da branch durante a branch main
+ 
+ $ git branch -m nome-da-branch novo-nome
+ 
+ Deletar branch
+ 
+ $ git branch -d nome-da-branch
+ 
+ Se mover com segurança entre as branchs
+ 
+ $ git stash save "mensagem do que está fazendo"
+ 
+ Listar stash state
+ 
+ $ git stash list
+ 
+ Abrir stash para voltar os arquivos ao projeto
+ 
+ $ git stash pop
+ 
+ Limpar stach
+ 
+ $ git stash clear
+ 
+ Visualizar histórico do repo em histórico de linha única
+ 
+ $ git log --oneline
+ 
+ Reverter commits
+ 
+ . por HEAD um commit pra traz
+ 
+ $ git reset HEAD~1
+ 
+ . por hash
+ 
+ $ git reset 906a15d
+ 
+ soft move para stageing / mixed move para working / hard apaga mesmo
+ 
+ Assunto 
+ 
+ curto e compreensível até 50 caracteres
+ Começar com letra maiúscula sem ponto final e escrito de forma imperativa (sempre no presente)
+ 
+ Corpo
+ 
+ Adicione detalhes, quebre linha em 75 caracteres, identifique sua aldiência, explique tudo e use markdown
+ 
+ $ git config --global core.editor "code --wait"
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

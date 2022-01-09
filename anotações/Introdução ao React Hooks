@@ -1,0 +1,121 @@
+ Introdução ao React Hooks
+
+ Celso Henrique / celso-henrique
+ 
+ ---- prop-types -------------------
+ 
+ typar propriedades com 'prop-types'
+ 
+ import { string } from 'prop-types';
+ 
+ MyComponent.propTypes = {
+ 	propNane01: string,
+ 	propName02: string
+ }
+
+ ---- TDD ----App.test.js ---------
+
+ import { rest } from 'msw';
+ import { setupServer } from 'msw/node';
+ import { render, screen, fireEvent } from '@testing-library/react';
+ import { MyComponent } from './MyComponent';
+ 
+ const text01 = 'teste 01';
+ const text02 = 'teste 02';
+ 
+ test('descrição do que será testado', () => {
+ 	render(<MyComponente text01={text01} text02={text02} />);
+ 	
+ 	const element01 = screen.getByText(text01);
+ 	const element02 = screen.getByText(`- ${text02}`);
+ 	const btnElement = screen.getByRole('button');
+ 	
+ 	expect(element01).toBeInTheDocument();
+ 	expect(element02).toBeInTheDocument();
+ 	expect(btnElement).toBeInTheDocument();
+ });
+ 
+ test('calls a callback when button is pressed', () => {
+ 	const callback = jest.fn();
+ 	
+ 	render(<MyComponent text01={text01} text02={text02} onUpdate={callback} />);
+ 	
+ 	const btnElement = screen.getByRole('button');
+ 	
+ 	fireEvent.click(btnElement);
+ 	
+ 	expect(callback).toHaveBeenCalledTimes(1);
+ });
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

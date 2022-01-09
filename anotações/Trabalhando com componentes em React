@@ -1,0 +1,60 @@
+ Trabalhando com componentes em React
+
+ Nathally Souza
+ 
+ . crear projeto react
+
+ $ npx create-react-app nome-do-projeto
+ 
+ . para instalar dependências em projeto existente
+  
+ $ npm i
+ 
+ SPA - Single Page Application
+ 
+ . executar o projeto localmente
+ 
+ $ npm start
+ 
+ React Fragment são tags vazias <></>
+ 
+ Sempre inicie o nome do componente com letra maiúscula
+ 
+ props contém atributos
+ 
+ props.children
+ 
+ ------ ./Button/index.js ----------
+ 
+ const Button = ( {children, className, children} ) => {
+ 	return (
+ 		<button
+ 			type="button"
+ 			className={className}
+ 			onClick={onClick}
+ 		>
+ 			{children}
+ 		</button>
+ 	)
+ }
+ 
+ ------ App.js -------------------
+ 
+ import { useState } from 'react';
+ 
+ const [value, setValue] = setState(0);
+ 
+ function Increment () {
+  	setValue(value + 1);
+ }
+ 
+ <Button
+ 	className="btn btn-success"
+ 	onClick={Increment}
+ >
+ 	Adicionar
+ </Button>
+ <p>{value}</p>
+ 
+ -------------------------
+ 

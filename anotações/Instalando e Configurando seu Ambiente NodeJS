@@ -1,0 +1,113 @@
+ Instalando e Configurando seu Ambiente Node.js
+ 
+ Felipe Aguiar
+ 
+ NodeJS
+ 
+ É um runtime JS desenvolvido com chrome v8 js engine
+ 
+ . Não é uma linguagem de programação e sim uma plataforma
+ 
+ . Náo é um framework
+ 
+ NPM
+ 
+ Node Package Manager
+ 
+ ctrl shift p
+ 
+ $ node index.js
+
+ Criar modelo de projeto node
+
+ $ npm init
+ 
+ package.json é o arquivo de configuração padrão do node
+
+ script é um atalho pra comandos node
+
+ $ npm run start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
