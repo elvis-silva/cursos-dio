@@ -1,0 +1,293 @@
+ JavaScript ES6 essencial
+ 
+ Guilherme Cabrini da Silva
+ 
+ ECMAScript é uma especificação de linguagem de programação
+ 
+ JS é ima linguagem interpretada
+ 
+ Linguagem de tipagem fraca e dinâmica
+ 
+ Funções de primeira classe e ordem maior
+ 
+ . A function pode ser atribuida a uma variável, array e passar por argumentos e passar por outras funtions
+
+ -------------------------
+ 
+ function getName() {
+ 	return 'my name';
+ }
+ 
+ funtions logFn(fn) {
+ 	console.log(fn());
+ }
+ 
+ const logFnResult = logFn;
+ 
+ logFnResult(getName);
+ 
+ -----------------------
+ 
+ . Closure ou escopo lexco, é a capacidade de uma function lembrar do ambiente em que foi criada
+ 
+ . Currying técnica de transformar uma function de n parâmetros em uma function que apenas um parâmetro
+ 
+ function soma(a) {
+ 	return function(b) {
+		return a + b; 	
+ 	}
+ }
+ 
+ const soma2 = soma(2);
+ 
+ console.log(soma2(2)); // 4
+ console.log(soma2(3)); // 5
+ console.log(soma2(5)); // 7
+ 
+ ---------------------------
+ 
+ . Hoisting de variável só eleva a criação de variável e não a sua atribuição
+ 
+ function fn() {
+ 	console.log(text); // undefined
+ 	
+ 	var text = 'text';
+ 	
+ 	console.log(text); // text
+ }
+ 
+ fn();
+ 
+ ----------------------
+ 
+ . Hoisting de function eleva a function como um todo
+ 
+ function fn() {
+ 	log('hoisting function'); // hoisting function
+ 	
+ 	function log(value) {
+ 		console.log(value);
+ 	}
+ }
+ 
+ fun();
+ 
+ ----------------------
+ 
+ Imutabilidade retorn um novo objeto sem alterar o original
+ 
+ cons user = {
+ 	name: 'Elvis',
+ 	lastName: 'Silva'
+ };
+ 
+ function getUserWithFullName(user) {
+ 	return {
+ 		...user, fullname: `${user.name} ${user.lastName}`
+ 	};
+ }
+ 
+ const userWithFullName = getUserWithFullName(user);
+ 
+ -------------------------
+ 
+ const students = [
+ 	{
+	 	name: 'Student 01',
+	 	grade: 6
+ 	},
+ 	{
+	 	name: 'Student 02',
+	 	grade: 4
+ 	},{
+	 	name: 'Student 03',
+	 	grade: 10
+ 	},
+ ];
+ 
+ function getApporvedStudents(studentsList) {
+ 	return studentsList.filter(student => student.grade >= 7);
+ }
+ 
+ --------------------------
+ 
+ escopos 
+ 
+ ---- class.js -------
+ 
+ // escopo local
+ 
+ {
+ 	// escopo de bloco
+ }
+ 
+ (){
+ 	// escopo de function
+ }
+ 
+ -------------------
+ 
+ const não altera valor da variável do tipo primitivo, porém permite alterar suas propriedades.
+ 
+ const name = "Elvis"; // não altera
+ 
+ const user = {
+ 	name: 'Elvis' // aqui pode mudar
+ };
+ 
+ ---- Variáveis tipo primitivos ---
+ 
+ . string
+ . number
+ . boolean
+ . null
+ . undefined
+ . symbol
+ 
+ --- string ------------
+ 
+ 'Texto'.split('x'); 				// ['Te', 'to']
+ 'Texto'.replace('Text', 'txeT'); 	// txeTo
+ 'Texto'.slice(-1); 				// o
+ 'Texto'.slice(0, -1); 				// Text
+ 'Texto'.slice(1); 					// exto
+ 'Texto'.substr(0, 2); 				// Te
+ 
+ --- number -----------
+ 
+ nyNumber.toString();				// retorna to string
+ myNunb.toFixed(2); 				// fixa em duas casa decimais 3.12 
+ parseFloat('13.35'); 				// retorna string em casas decimais 13.35
+ parseInt('13.35');					// retorna string em numero inteiro 13
+ 
+ --- null -------------
+ 
+ retorna objeto nulo
+ 
+ --- undefined -------
+ 
+ retorna objeto indefinido
+ 
+ --- boolean ---------
+ 
+ retorna true or false
+ 
+ --- object ----------
+ 
+ let user = {
+ 	name: 'Nome',
+ 	lastName: 'Sobrenome'
+ }
+ 
+ user.name = 'New Name';
+ user['name'] = 'New Name';
+ 
+ Object.keys(user); 								// ['name', 'lastName']
+ Object.value(user);   								// ['Nome', 'Sobrenome']
+ Object.entries(user);								// [['name', 'Nome'],
+ 													    ['lastName', 'Sobrenome']]
+ Object.assign(user, {fullName: 'Nome Sobrenome'}); // { name: 'Nome', 
+ 													 	 lastName: 'Sobrenome'
+ 													  	 fulname: 'Nome Sobrenome'}
+ Object.freeze(user); 								// Trava object de alterações
+ Object.seal(user); 								// não permite apagar e nem 					
+ 													   inserir propriedades novas, 
+ 													   mas permite alterar 
+ 													   o valor delas
+ 
+ --- function ---------
+ 
+ function fn() {
+ 	...
+ }
+ 
+ const fn () => '...';
+ 
+ const controlFnExec => fnParam => allowed => {
+ 	if(allowed) {
+ 		fnParam();
+ 	}
+ }
+ 
+ --- Array ----------
+ 
+ . permite criar uma lista de coisas dentro dos colchetes
+ 
+ [
+ 	{nome: 'Nome'},
+ 	{nome: 'Outro'},
+ 	{nome: 'Mais'}
+ ]
+ 
+ array.gorEach(() => {})
+ 
+ array.filter(person => person.gender === gender.MAN);
+ 
+ // retorna nova array
+ array.map(person => {
+ 	person.course = "Curso";
+ 	return person;
+ });
+ 
+ // transforma array em outro tipo
+ person.reduce((age, person) => {
+ 	age += person.age;
+ 	return age;
+ }, 0);
+ 
+ --- spread -----------------
+ 
+ var partes = ['2','3'];
+ var notas = ['1', ...partes, '4', '5']; // ['1', '2', '3', '4', '5']
+ 
+ function fn(x, y, z) {}
+ var args = [0, 1, 2];
+ fn(...args); // 1, 2, 3
+ 
+ --- herança -----------------------
+ 
+ . baseada em protótipos
+ 
+ const mYText = 'Hello';
+ mtext.constructor -> String
+ myText.__proto__ -> String.prototype
+ 
+ ----
+ 
+ Patterns mais utilizados
+ 
+ . Factory
+ . Singleton
+ . Decorator
+ . Observer
+ . Module
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

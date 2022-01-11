@@ -1,0 +1,507 @@
+ Desenvolvimento avançado com JavaScript ES6
+
+ Celso Henrique da Silva
+
+ function sum(...args) {
+	return args.reduce((acc, value) => acc + value, 0);
+ }
+ 
+ sum(5,5,5,2,3);  // 20
+ 
+ ...rest operator transforma todos os parâmetros numa array
+ 
+ ...spread operator transforma a array em objetos
+ 
+ const n = "nome";
+ 
+ function logArgs(...args){
+ 	console.log(args);
+ }
+ 
+ logArgs(...n); // "n","o","m","e"
+ 
+ arr = [1, 2, 3];
+ arr2 = [...arr, 4, 5, 6];    // 1, 2, 3, 4, 5, 6
+ 
+ --- Destructuring ---
+ 
+ var obj = {
+ 	name: 'Nome'
+ };
+ 
+ var { name } = obj;
+ 
+ console.log(name); // Nome
+ 
+ var obj = {
+ 	name: 'Nome',
+ 	props: {
+ 		age: 20,
+ 		favColors; ['black', 'blue']
+ 	}
+ };
+ 
+ var {
+ 	props: {
+ 		age: age2,
+ 		favColors: [color1, color2]
+ 	}
+ } = obj;
+ 
+ console.log(color1); // black
+ console.log(age2); // 20
+ 
+ ---- Symbol -----
+ 
+ . Symbol é um identificador único
+ 
+ const uniqId = Symbol();
+ 
+ const arr = [1, 2, 3];
+ const it = arr[Symbol.iterator]();
+ 
+ console.log(it.next()); // value:1, 		 done:false
+ console.log(it.next()); // value:2, 		 done:false
+ console.log(it.next()); // value:3, 		 done:false
+ console.log(it.next()); // value:undefined, done:true
+ 
+ while (true) {							
+ 	let { value, done } = it.next();    // 1
+ 	if(done) {							// 2
+ 		break;							// 3
+ 	}									// 4
+ 	console.log(value);		
+ } 
+ 
+  	ou 
+  	
+ for (let value of arr) {
+ 	console.log(value);
+ }
+ 
+ . iterador é uma interface
+ 
+ --- Transformar um obj não iterável em iterável ---
+ 
+ const obj = {
+ 	value: [1, 2, 3, 4],
+ 	[Symbol.iterator]() {
+ 		let i = 0;
+ 		
+ 		return {
+ 			next: () {
+ 				i++;
+ 				
+ 				return{
+ 					value: this.value[i - 1],
+ 					done: i > this.values.length
+ 				};
+ 			}
+ 		};
+ 	}
+ };
+ 
+ for(let valeu of obj) {
+ 	console.log(value);
+ }
+ 
+ const arr = [...obj]; // [1, 2, 3, 4]
+ 
+ ---- Generator -----------------------------------
+ 
+ function* hello() {
+ 	console.log('hello');
+ 	yield;
+ 	
+ 	console.log('from');
+ 	const value = yield;
+ 	
+ 	console.log('function');
+ 	yield;
+ }
+ 
+ const it = hello();
+ 
+ console.log(it.next()); 			// hello
+ console.log(it.next()); 			// from
+ console.log(it.next('outside')); 	// outside
+ 
+ -----
+ 
+ function* naturalNum() {
+ 	let num = 0;
+ 	while(true) {
+ 		yield num;
+ 		num++;
+ 	}
+ }
+ 
+ const it = naturalNum();
+ 
+ console.log(it.next()); // 0
+ console.log(it.next()); // 1
+ console.log(it.next()); // 2 
+ console.log(it.next()); // 3
+ 
+ colocando um * em frente ao obj iterável vira um generator: ex: 
+ 
+ *[Symbol.iterator](){
+ 	...
+ }
+ 
+ --- Promises -----------
+ 
+ 3 estados: pending, fulfilled e rejected
+ 
+ const doSomethingPromise = () => 
+ 	new Promise((resolve, reject) => {
+ 		setTimeout(function() {
+ 			resolve('First data');
+ 		}, 1000);
+ 	});
+ 
+ const doOtherfingPromise = () => 
+ 	new Promise((resolve, reject) => {
+ 		setTimeout(function() {
+ 			resolve('Second data');
+ 		}, 1000);
+ 	});
+ 	
+ 	Execute assim:
+ 
+ doSomethingPromise()
+ 	.then(date => {
+ 		console.log(data);
+ 		return doOtherfingPromise();
+ 	})
+ 	.then(data2 => console.log(data2))
+ 	.catch(error => console.log('Ops', error));
+ 
+ 	ou:
+ 	
+ Promise.all([doSomethingPromise(), doOtherthingPromisse()]).then(data => {
+ 	console.log(data[0]);
+ 	console.log(date[1]);
+ }).catch(err => {
+ 	console.log(err);
+ });
+ 
+ --- Fetch --------------
+ 
+ fetch('http://localhost:8080/data.json')
+ 	.then(responseStream => {
+ 		if() {
+ 			return responseStream.json()
+ 		} else {
+ 			throw new Error('Request error');
+ 		}
+ 	})
+ 	.then(data => {
+ 		console.log(data)
+ 	})
+ 	.catch(err => {
+ 		console.log('Error: ', err);
+ 	});
+ 
+ -- async / await ------------
+ 
+ const asyncTimer = () => 
+ 	new Promise((resolve, reject) => {
+ 		setTimeout(() => {
+ 			resolve(123456);
+ 		}, 1000);
+ 	});
+ 
+ const simpleFunc = async () => {
+ 	const data = await asyncTimer();
+ 	console.log(data);					// 123456
+ 	const dataJSON = await fetch('/data.json')
+ 		.then(resStream => resStream.jason());
+ 	
+ 	return dataJSON;
+ };
+ 
+ simpleFunc().then(data => {
+ 	console.log(data);					// dados tratados do json
+ }).catch(err => {
+ 	console.log('oh no!', err)
+ });
+ 
+ --- EventEmitter --------------
+ 
+ const EventEmiter = require('event');
+ 
+ class Users extends EventEmitter {
+ 	userLogged(data){
+ 		setTimeout(() => {
+ 			this.emit('User logged', data);
+ 		}, 2000);
+ 	}
+ }
+ 
+ const users = new Users();
+ 
+ users.once('User logged', data => {
+ 	console.log(data);
+ });
+ 
+ users.userLogged({ user: 'User Name' });
+ 
+ --- Testes, TDD e BDD ------------------
+ 
+ Tipos de testes
+ 
+ . unitários
+ . integrados
+ , funcionais
+ 
+ --- TDD (Test Driven Development) ------
+ 
+ É um dos pilares do Extreme Programming, consiste em testar e refatorar em pequenos ciclos onde você escreve o teste antes do código, faz o mesmo passar e rafatorar o código.
+ 
+ Escrita do teste -> Escrita do código -> refatoração
+ 
+ . Vantagens
+ 
+ - Feedback rápido
+ - Maior segurança em alterações e novas funcionalidades
+ - Código mais limpo
+ - Produtividade
+ 
+ --- BDD (Behavior Driven Development) ------
+ 
+ É a técnica de desenvolvimento ágil que visa integrar regras de negócio com linguagem de programação.
+ 
+ . Pilares
+ 
+ - Teste 
+ - Documentação
+ - Exemplos
+ 
+ . Vantagens
+ 
+ - Compartilhamento de conhecimento
+ - Documentação dinâmica
+ - Visão do todo
+ 
+ ---- Mocha ----------------------------
+ 
+ $ npn install --save-dev mocha
+ 
+ ---- math.spec.js ---- sem async ------------------
+  
+ const assert = require('assert');
+ const Math = require('../src/math.js');
+ 
+ describe('Math class', function() {
+ 	it('Sum two numbers', function() {
+ 		const math = new Math();
+ 		
+ 		assert.equal(math.sum(5, 5), 10);
+ 	});
+ });
+ 
+ ---- math.js -------- sem async ------------------
+ 
+ class Math {
+ 	sum(a, b) {
+ 		return a + b;
+ 	}
+ }
+ 
+ module.export = Math;
+ 
+ ----- math.spec.js ---- com async ----- done ---------
+ 
+ const assert = require('assert');
+ const Math = require('../src/math.js');
+ 
+ describe('Math class', function(done) {
+ 	it('Sum two numbers', function() {
+ 		const math = new Math();
+ 		
+ 		math.sum(5, 5, value => {
+ 			assert.equal(value, 10);
+ 			done()
+ 		});		
+ 	});
+ });
+ 
+ ---- math.js -------- com async ------------------
+ 
+ class Math {
+ 	sum(a, b, callback) {
+ 		setTimeout(() => {
+ 			callback(a + b);
+ 		}, 2000);
+ 	}
+ 	multiply(a, b) {
+ 		return a * b;
+ 	} 	
+ }
+ 
+ module.export = Math;
+ 
+ ---- chai --------------------------------------
+ 
+ $ npm install --dave-dev chai
+ 
+ ----- math.spec.js ---- com async ----- com chai -----
+ 
+ const assert = require('assert');
+ const Math = require('../src/math.js');
+ const expect = require('chai').expect;
+ 
+ let value = 0;
+ 
+ describe('Math class', function(done) {
+ 
+ 	// hooks
+ 	beforeEach(function() {
+ 		value = 0;
+ 	});
+ 	
+ 	it('Sum two numbers', function() {
+ 		const math = new Math();
+ 		this.timeout(3000);
+ 		
+ 		value = 5;
+ 		
+ 		math.sum(value, 5, value => {
+ 			expect(value).to.equal(10);
+ 			done()
+ 		});		
+ 	});
+ 	
+ 	it('Multiply two numbers', function() {
+ 		const Math = new Math();
+ 		const obj = {
+ 			name: 'Nome'
+ 		};
+ 		
+ 		expect(obj).to.have.property('name').equal('Nome');
+ 	});
+ });
+ 
+ ---- Sinon ----------------------------------
+ 
+ $ npm i --save-dev sinon
+ 
+ ----- math.spec.js ---- com async ----- com sinon -----
+ 
+ const assert = require('assert');
+ const Math = require('../src/math.js');
+ const expect = require('chai').expect;
+ const sinon = require('sinon');
+ 
+ let value = 0;
+ 
+ describe('Math class', function(done) {
+ 
+ 	// hooks
+ 	beforeEach(function() {
+ 		value = 0;
+ 	});
+ 	
+ 	it('Sum two numbers', function() {
+ 		const math = new Math();
+ 		this.timeout(3000);
+ 		
+ 		value = 5;
+ 		
+ 		math.sum(value, 5, value => {
+ 			expect(value).to.equal(10);
+ 			done()
+ 		});		
+ 	});
+ 	
+ 	it('Multiply two numbers', function() {
+ 		const Math = new Math();
+ 		const obj = {
+ 			name: 'Nome'
+ 		};
+ 		
+ 		expect(obj).to.have.property('name').equal('Nome');
+ 	});
+ 	
+ 	it.only('Call req with sum and index values', function() {
+ 		const req = {};
+ 		const res = {
+ 			load: sinon.spy();
+ 		};
+ 		const math = new Math();
+ 		
+ 		math.printSum(req, res, 5, 5);
+ 		
+ 		expect(res.load.args[0][0]).to.equal('index');
+ 		// expect(res.load.args[0][1]).to.equal(10);
+ 	});
+ });
+ 
+ ---- math.js -------- com async ------------------
+ 
+ class Math {
+ 	sum(a, b, callback) {
+ 		setTimeout(() => {
+ 			callback(a + b);
+ 		}, 2000);
+ 	}
+ 	multiply(a, b) {
+ 		return a * b;
+ 	} 	
+ 	printSum(req, res, a, b) {
+ 		res.load('index', a + b);
+ 	}
+ }
+ 
+ module.export = Math;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
