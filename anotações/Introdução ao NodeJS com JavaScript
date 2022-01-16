@@ -1,0 +1,197 @@
+ Introdução ao Node.js com JavaScript
+ 
+ Diana Martine Matias
+ 
+ --- variáveis ----
+ 
+ . var: escopo local e global, pode-se alterar o valor. padrão undefined
+ . let: local de bloco e pode-se alterar, padrão undefined
+ . const: local de bloco somente leitura, obrigatório declarar valor inicial
+ 
+ --- objetos ----
+ 
+ . Dados que possuem propriedades e valores que definem suas características.
+ 
+ var xicara = {
+ 	cor: 'azul',
+ 	tamanho: 'p',
+ 	funcao: tomarCafe()
+ }
+ 
+ . Objetos podem ser atribuídos a variáveis, podem guardar propriedades e valores, outros objetos e arrays.
+ 
+ --- Function -----
+ 
+ . Conjuntos de instruções para realizar determinadas tarefas. 
+ 
+ Tipos de funções:
+ 
+ . Declaração: deve ser nomeada. Ex: 
+ 
+ 	function nomeDaFunction(){}
+ 
+ . Expressão: atribuída a expressão, nomeação opcional. Ex: 
+ 
+ 	var x = function(){} 
+ 	
+ 		ou 
+ 	
+ 	var x = function xX(){}
+ 
+ . Arrow function: function de expressão de sintaxe curta, sempre anônima, não pode ser nomeada. Ex:
+ 
+ 	var x = () => {};
+ 	
+ --- NodeJS ----
+ 
+ . Ambiente de execução do JavaScript em server-side. Ele nos dá a possibilidade de rodar localmente o JS fora do navegador.
+ 
+ Entrar no node:
+ 
+ $ node
+ 
+ Sair do node
+ 
+ $ .exit
+ 
+ Node trabalha como single-thread. As requisições são assíncronas, agilizando assim o processo. Em event-loop.
+ 
+ Executar arquivo:
+ 
+ $ node nome-do-arquivo.js
+ 
+ . Blocking: Síncrono, pois a entrega depende que todas as requisições estejam prontas.
+
+ . Non-blocking: assíncrono, pois a entrega é feita mesmo sem todas as requisições estarem prontas. Trabalha em event-loop.
+ 
+ . Event-loop: execução das requisições de forma assíncrona.
+ 
+ --- Vantagens ---
+ 
+ . Flexibilidade
+ . Leveza
+ . Escalabilidade
+ . Redução de custos
+ . NPM
+ . Mesma linguagem em front e back
+ 
+ --- NPM ----------------
+ 
+ . Ferramenta de gerenciamento de pacotes do nodeJS
+ 
+ Iniciar pacote npm
+ 
+ $ npm init
+ 
+ --- Criar servidor ------ server.js --------
+ 
+ const http = require('http');
+ const host = 'http://localhost';
+ const port = 3000;
+ const stats = require('./pcRamUsage');
+ 
+ http.createServer((req, res) => {
+ 	let url = req.url;
+ 	
+ 	if(url === /stats) {
+ 		req.end(JSON.stringfy(stats, null, 2));
+ 	} else {
+ 		res.end('<h1>Working</h1>')
+ 	}
+ 	
+ }).listen(port, () => console.log(`Server is running in ${host}:${port}`));
+ 
+
+ --- pcRamUsage.js --------
+ 
+ const os = require('os');
+ 
+ // console.log(os);
+ 
+ const { arch, platform, totalmem, freemem } = os;
+ const tRam = totalmem() / 1024 / 1024;
+ const fRam = freemem() / 1024 / 1024;
+ 
+ const stats = {
+ 	OS: platform(),
+ 	Arch: arch(),
+ 	TotalRam: parseInt(tRam),
+ 	FreeRam: parseInt(fRam)
+ };
+ 
+ console.log(stats);
+ 
+ export.stats = stats;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

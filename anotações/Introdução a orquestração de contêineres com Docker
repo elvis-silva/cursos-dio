@@ -1,0 +1,79 @@
+ Introdução a orquestração de contêineres com Docker
+ 
+ Luiz Miguel Flores dos Santos
+ 
+ play-with-docker.com
+ 
+ criar imagens
+ 
+ $ docker run --name nome-do-container -p 80:80 -d nginx
+ 
+ listar imagens
+ 
+ $ docker images
+ 
+ $ docker ps
+ 
+ remover imagens
+ 
+ $ docker rm -f nome-do-container
+ 
+ 
+ $ docker network ls
+ 
+ $ docker network create -d bridge nomeDaRede
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

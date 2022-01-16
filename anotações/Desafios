@@ -87,6 +87,7 @@ let total = chico+bento+bernardo+marina+iara+marlene; // Digite aqui o calculo t
 print(total);
 _______________________________________________________________________
 
+
 3/3 Números Ímpares
 
 let lines = gets().split('\n')
@@ -100,3 +101,210 @@ for (let i = 1; i <= N; i++) {
     print(i);
   }
 }
+
+--- Resolvendo Desafios Básicos em JavaScript ---
+
+ --- 1/3 - Múltiplos -----
+
+	let lines = gets().split("\n");
+
+	let line = lines.shift().split(" ");
+	let A = parseInt(line[0]);
+	let B = parseInt(line[1]);
+
+	let isMultiple = A%B === 0 || B%A === 0;
+
+	if(isMultiple) 
+		print(`Sao Multiplos`);                   //complete com a sua lógica
+	else 
+		print(`Nao sao Multiplos`);
+    
+    	
+ --- 2/3 - Teste de Seleção 1 ----
+ 
+
+	x = gets().split(" ");
+
+	a = parseInt(x[0]);
+
+	b = parseInt(x[1]);
+
+	c = parseInt(x[2]);
+
+	d = parseInt(x[3]);
+
+	bmc = b > c;
+	dma = d > a;
+	cpdmapb = c+d > a+b;
+	cdp = c >= 0 && c%2 === 0 && d%2 === 0;
+	ap = a%2 === 0;
+
+	//if (bmc && dma && cpdmapb && cp && dp && ap)
+	if(b > c && d > a && c+d > a+b && c >= 0 && d >= 0 && a%2 === 0)
+	{
+	  print(`Valores aceitos`);
+	}
+	else
+	{
+	  print(`Valores nao aceitos`);
+	}
+
+
+ --- 3/3 - Folha de Pagamento ----
+ 
+
+	let valor1 = parseInt(gets());
+	let valor2 = parseInt(gets());
+	let valor3 = parseFloat(gets());
+
+	// Escreva o seu código aqui
+	let salary = parseFloat(valor2 * valor3).toFixed(2);
+
+	print(`NUMBER = ${valor1}\nSALARY = U$ ${salary}`);
+	
+	
+ ---- Resolvendo desafios em JavaScript ------------------------------
+ 
+ --- 1/3 - Frota de Táxi ----
+ 
+	let lines = gets().split('\n');
+
+	const [precoAlcool, precoGasolina, rendimentoAlcool, rendimentoGasolina] = 
+	  lines[0].split(' ').map(x => parseFloat(x));
+
+	const precoPorKmAlcool = precoAlcool / rendimentoAlcool;
+	const precoPorKmGasolina = precoGasolina / rendimentoGasolina;
+
+	const maisEconomico = precoPorKmGasolina <= precoPorKmAlcool ? 'G' : 'A';
+
+	print(maisEconomico);
+ 
+ --- 2/3 - Xadrez -----------
+ 
+	let lines = gets().split("\n");
+
+	var l = parseInt(lines[0]);
+	var c = parseInt(lines[1]);
+
+	if (l % 2 === 0)
+	  if (c % 2 === 0) print(1);
+	  else print(0);
+	else if (l%2 === c%2) print(0);
+	 else print(1);      //complete o código nos espaços em branco
+ 
+ --- 3/3 - Nossos Dias Nunca Voltarão -----------------
+ 
+ 	let lines = gets().split("\n");
+
+	let n = parseInt(lines.shift());
+	//escreva o seu código aqui
+	let str = "LIFE IS NOT A PROBLEM TO BE SOLVED";
+
+	print(`${str.substring(0,n)}\n`);
+ 
+ ---- Resolvendo Desafios Intermediários em JavaScript -----------
+ 
+ --- 1/3 - Triângulo ---------
+ 
+ 	let lines = gets().split('\n')
+
+	let line = lines.shift().split(" ");
+	let A = parseFloat(line[0]);
+	let B = parseFloat(line[1]);
+	let C = parseFloat(line[2]);
+	let maior;
+	let soma;
+	let triangulo;
+
+	if (A > B && A > C) maior = A;
+	else if (B > C) maior = B;
+	else maior = C;
+
+	if (maior == A) soma = B + C;
+	else if (maior == B) soma = A + C;
+	else soma = B + A;
+
+	if (soma > maior) triangulo = true;
+	else triangulo = false;
+
+	if (triangulo) {
+	  let perimetro = parseFloat(A + B + C).toFixed(1);
+
+	  print(`Perimetro = ${perimetro}`); 
+
+	} else {
+	  let area = parseFloat(((A+B) * C) / 2).toFixed(1);
+
+	  print(`Area = ${area}`);    
+
+	}
+ 
+ --- 2/3 - Guilherme e Suas Pipas ------
+ 
+	let lines = gets().split("\n");
+
+	let N = parseInt(lines.shift());
+	let resposta = (N * (N - 3)) / 2;                // insira o seu código aqui
+
+	print(resposta);
+ 
+ --- 3/3 - Tomadas -----------------
+ 
+	let lines = gets().split("\n");
+
+
+	let line = lines.shift().split(' ');
+
+	//escreva aqui o seu código
+	let T1 = parseInt(line[0]);
+	let T2 = parseInt(line[1]);
+	let T3 = parseInt(line[2]);
+	let T4 = parseInt(line[3]);
+	let numTomadas = T1 + T2 + T3  + T4 - 3;
+	print(numTomadas);
+	
+-------------------------------------------------------------
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

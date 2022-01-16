@@ -1,0 +1,328 @@
+ Microsserviços e Integrações com Node.js
+ 
+ Renan Johannsen
+ 
+ [ TESTES ] ==> elephantsql.com
+ 
+  --- index.ts ---------------------
+ 
+ import express from 'express';
+ import statusRoute from './routes/status.route';
+ import usersRoute from './routes/users.route';
+ 
+ const app = express();
+ 
+ app.use(express.json());
+ app.use(express.urlencode({ extended: true }));
+ 
+ app.use(statusRoute);
+ app.use(usersRoute);
+ 
+ app.listen(3000, () => {
+ 	console.log('Aplicação executando na porta 3000!');
+ });
+ 
+ --- status.route.ts -----------------
+ 
+ import { Router, Request, Response, NextFunction } from 'express';
+ import { StatusCodes } from 'http-status-codes';
+ 
+ const statusRoute = Router();
+ 
+ statusRoute.get('/status', (req: Request, res: Response, next: NextFunction) => {
+ 	res.sendStatus(StatusCodes.OK);
+ });
+ 
+ export default statusRoute;
+ 
+ --- users.route.ts ------------------
+ 
+ import { Router, Request, Response, NextFunction } from 'express';
+ import { StatusCode } from 'http-status-code';
+ import userRepository from '../repositories/user.repository';
+ 
+ const usersRoute = Router();
+ 
+ usersRoute.get('/users', async (req: Request, res: Response, next: NextFunction) => {
+ 	const users = await userRepository.findAllUsers();
+ 	res.status(StatusCode.OK).send(users);
+ });
+ 
+ usersRoute.get('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFuntion) => {
+ 	const uuid = req.params.uuid;
+ 	const user = await userRepository.findById(uuid);
+ 	res.status(StatusCode.OK).send(user);
+ });
+ 
+ usersRoute.post('/users', async (req: Request, res: Response, next: nextFunction) => {
+ 	const newUser = req.body;
+ 	
+ 	const uuid = await userRepository.create(newUser);
+ 	
+ 	res.status(StatusCodes.CREATED).send(newUser);
+ });
+ 
+ usersRoute.put('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NestFunction) => {
+ 	const uuid = rep.params.uuid;
+ 	const modifiedUser = req.body;
+ 	
+ 	modifiedUser.uuid = uuid;
+ 	
+ 	await userRepository.update(modifiedUser);
+ 	
+ 	res.status(StatusCode.OK).send(modifiedUser);
+ });
+ 
+ usersRoute.delete('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) -> {
+	const uuid = req.params.uuid;
+	
+	await userRepository.remove(uuid);
+
+ 	res.sendStatus(StatusCode.OK);
+ });
+ 
+ export default usersRoute;
+ 
+ --- node-postgres ---------------------------------------
+ 
+ $ npm install --save pg
+ 
+ --- db.ts -----------------------------------------------
+ 
+ import { Pool } from 'pg';
+ 
+ const connectonString = 'url-do-db';
+ 
+ const db = new Pool({ connectionString });
+ 
+ export default db;
+ 
+ --- init.sql --------------------------------------------
+ 
+ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+ CREATE EXTENSION IF NOT EXISTS "pgcrypt";
+ 
+ CREATE TABLE IF NOT EXISTS application_user(
+ 	uuid uuid DEFAULT uuid_generate_v4(),
+ 	username VARCHAR NOT NULL,
+ 	password VARCHAR NOT NULL,
+ 	PRIMARY KEY (uuid)
+ )
+ 
+ INSERT INTO application_user (username, password) VALUES ('admin', crypt(
+ 	'admin', 'my_salt'
+ ));
+ 
+ --- user.repository.ts -------------------
+ 
+ import db from '../db';
+ import User from '../models/user.model';
+ 
+ class UserRepository {
+ 	
+ 	async findAllUsers(): Promise<User[]> {
+ 		const query = `
+ 			SELECT uuid, username
+ 			FROM application_user
+ 		`;
+ 		
+ 		const { rows } = await db.query<User>(query);
+ 		const rows = result.rows;
+ 		
+ 		return rows || [];
+ 	}
+ 	
+ 	async findById(uuid: string): Promise<User> {
+ 		const query = `
+ 			SELECT uuid, username
+ 			FROM application_user
+ 			WHERE uuid = $1
+ 		`;
+ 		
+ 		const values = [uuid];
+ 		
+ 		const { rows } = await db.query<User>(query, values);
+ 		const [ user ] = rows;
+ 		
+ 		return user;
+ 	}
+ 	
+ 	async findByUsernameAndPassword(username: string, password: string): Promise<User> | null {
+ 		try {
+	 		const query = `
+	 			SELECT uuid, username
+	 			FROM application_user
+	 			WHERE username = $1
+	 			AND password = crypt($2, 'my_salt')
+	 		`;
+	 		const values = [username, password];
+	 		const { rows } = await db.query<User>(query, values);
+	 		const [ user ] = rows;
+	 		return user || null;
+	 	} catch (error) {
+	 		throw new DatabaseError('Erro na consulta por username e password', error);
+	 	}
+ 	}
+ 	
+ 	async create(user: User): Promise<string> {
+ 		const script = `
+ 			INSERT INTO application_user (
+ 				username,
+ 				password
+ 			)
+ 			VALUES ($1, crypt($2, 'my_salt'))
+ 			RETURNING uuid
+ 		`;
+ 		
+ 		const values = [user.username, user.password];
+ 		
+ 		const { rows } = await db.query<{ uuid: string }>(script, values);
+ 		const [newUser] = rows;
+ 		return newUser.uuid;
+ 	}
+ 	
+ 	async update(user: User): Promise<void> {
+ 		const script = `
+ 			UPDATE application_user
+ 			SET
+ 				username = $1
+ 				password = crypt($2, 'my_salt')
+ 			WHERE uuid = $3
+ 		`;
+ 		
+ 		const values = [user.username, user.password, user.uuid];
+ 		await db.query(script, values);
+ 	}
+ 	
+ 	async remove(uuid: string): Promise<void> {
+ 		const script = `
+ 			DELETE 
+ 			FROM application_user
+ 			WHERE uuid = $1
+ 		`;
+ 		
+ 		const values = [uuid];
+ 		
+ 		await db.query(script, values);
+ 	}
+ }
+ 
+ export default new UserRepository();
+ 
+ --- user.models.ts -----------------------
+ 
+ type User {
+ 	uuid?: string;
+ 	username: string;
+ 	password?: string;
+ }
+ 
+ export default User;
+ 
+ --- database.error.model.ts -------------
+ 
+ class DatabaseErros extends Error {
+ 	constructor(
+ 		public message: string,
+ 		public error?: any
+ 	) {
+ 		super(message);
+ 	}
+ }
+ 
+ export default DatabaseError;
+ 
+ --- forbidden.error.model.ts ------------
+ 
+ export default class ForbiddenError extends Error {
+ 	constructor(
+ 		public message: string,
+ 		public error?: any
+ 	) {
+ 		super(message);
+ 	}
+ }
+ 
+ --- error-handler.middleware.ts -----------
+ 
+ import { NextFunction, Request, Response } from 'express';
+ import { StatusCode } from 'http-status-codes';
+ import DataBaseError from '../models/errors/database.error.model';
+ 
+ function errorHandler(error: any, req: Request, res: Response, next: NextFunction) {
+ 	if(error instanceof DatabaseError) {
+ 		res.sendStatus(StatusCodes.BAD_REQUEST)
+ 	} else if(error instanceof ForbiddenError) {
+ 		res.sendStatus(StatusCodes.FORBIDDEN);
+ 	} else {
+ 		res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+ 	}
+ }
+ 
+ export default errorHandler;
+ 
+ ---------- JWT ----- jwt.io ---------
+ 
+ $ npm install --save-dev @types/jsonwebtoken
+ 
+ . iss: domínio da aplicação geradora do token
+ . sub: assunto do token muito utilizado para guardar id do user
+ . aud: define quem pode usar o token
+ . exp: data de expiração do token
+ . nbf: define data para qual o token não pode ser aceito antes dela
+ . iat: data de criação do token
+ . jti: id do token
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

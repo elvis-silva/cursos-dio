@@ -1,0 +1,116 @@
+ Introdução ao MongoDB e Bancos de Dados NoSQL
+ 
+ Pâmela Apolinário 
+ 
+ neo4j
+ 
+ CREATE (:Client {name : "Bob Esponja", age: 28, hobbies: ['Caça agua-viva, Comer hamburgues']})
+ 
+ MATCH (bob_esponja) RETURN bob_esponja;
+ 
+ Auto-sharding = escalamento horizontal
+ 
+ --- MongoDB ----
+ 
+ . Document ==> Tupla/Registro
+ 
+ . Collection==> Tabela
+ 
+ . Embedding/linking ==> Join
+ 
+ --- Quando usar:
+ 
+ . Grande volume de dados
+ 
+ . Dados não necessariamente estruturados
+ 
+ --- Quando não utilizar:
+ 
+ . Necessidade de relacionamento/Joins
+ 
+ . Propriedades ACID e transações são importantes
+ 
+ ------------------
+ 
+ --- Schema design
+ 
+ . Embedding Documentos autocontido
+ 
+ one-two-few prefira embedding
+ 
+ one-to-many e many-to-many prefira referência
+ 
+ ----- Bson -----
+ 
+ . É uma serialização codificada em binário de documentos semelhantes a JSON
+ . Contém extensões que permitem a representação de tipos de dados que não fazem parte da especificação JSON. Por exemplo, BSON tem o tipo Date, ObjectID
+ 
+ ------------------
+ 
+ $ show databases;
+ 
+ $ use nome_do_db
+ 
+ $ db.createCollection("test", {copped: true, max: 2, size: 2});
+ 
+ $ show collections;
+ 
+ $ db.test.insertOne({"name": "Test 01"});
+ 
+ $ db.test.find({});
+ 
+ $ db.test.update({"name": "Meu Nome"}, {$set: {"age": 43}});
+ 
+ $ db.test.updateMany({"age": 43}, {$set: {"age": 55}});
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
