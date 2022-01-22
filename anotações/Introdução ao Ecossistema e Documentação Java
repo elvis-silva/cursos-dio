@@ -1,0 +1,104 @@
+ Introdução ao Ecossistema e Documentação Java
+ 
+ Daniel Hatanaka / @hatanakadaniel
+ 
+ --- JAVA -----
+ 
+ Características:
+ 
+ . Compilada
+ . Interpretada
+ . Fortemente tipada
+ . Linguagem de alto nível
+ . Executada em JVM - Java Virtual Machine
+ 
+ --- JVM ---
+ 
+ Características:
+ 
+ . Execução de pilhas
+ . Gerenciamento de memória
+ . Gerenciador de threads
+ . Otimização de código JIT (Just In Time)
+ . Garbage Collector (GC)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
