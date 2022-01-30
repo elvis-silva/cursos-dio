@@ -263,10 +263,303 @@ for (let i = 1; i <= N; i++) {
 	let numTomadas = T1 + T2 + T3  + T4 - 3;
 	print(numTomadas);
 	
--------------------------------------------------------------
-
-
+ --- Desafios Iniciais - GFT Start #3 Java ---------------------
  
+ --- 1/3 - Multiplicação Simples ------
+ 	
+ 	import java.util.Scanner;
+
+	public class Main {
+		public static void main(String[] args) {
+			Scanner sc = new Scanner(System.in);			
+			int A, B, PROD;			
+			A = sc.nextInt();
+			B = sc.nextInt();			
+			PROD =  A * B; //implemente o código que representa a multiplicação.			
+			System.out.println("PROD = " + PROD);			
+			sc.close();			
+		}
+	}
+	
+ --- 2/3 - Resto 2 --------------
+ 
+ 	import java.io.IOException;
+	import java.util.Scanner;
+
+	public class DIO {		
+		public static void main(String[] args) throws IOException {
+			Scanner leitor = new Scanner(System.in);
+			int N = leitor.nextInt();
+			for (int i = 1; i < 10000; i++) {
+				if (i % N == 2) System.out.println(i);
+			}
+		}
+	//Complete com a sua lógica nos espaços em branco	
+	}
+	
+ --- 3/3 - Xadrez -----------------
+ 
+	import java.util.Scanner;
+	
+	public class Main {
+		public static void main(String[] args) {
+			Scanner sc = new Scanner(System.in);
+			
+			int L = sc.nextInt();
+			int C = sc.nextInt();
+			if ((L % C) == 0)
+				System.out.println("1");
+			else                     //complete o código nos espaços em branco
+				System.out.println("0");
+			sc.close();
+		}
+	}
+ 
+ ---- Desafios Básicos- GFT Start #3 Java ----------------------
+ 
+ --- 1/3 - Quantidade de Números Positivos ------
+ 
+ 	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+ 
+	public class QtdeNumerosPositivos {
+		public static void main(String[] args) throws IOException {
+		   String linha;
+		   Double n;
+		   int Pos, i;
+	 
+		   Pos=0;
+		   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		   
+		   for (i = 0; i < 6; i++) {
+		       linha = br.readLine();
+		       n = Double.parseDouble(linha);
+		       if(n >= 0)Pos++;
+		   }
+	 
+		   System.out.println("" + Pos + " valores positivos");
+		}
+	}
+ 
+ --- 2/3 - Batalha de Digitrons ---------------
+ 
+	import java.io.IOException;
+	import java.util.Scanner;
+
+	public class Problem {
+	//complete os espaços em branco com uma solução possível
+		
+		public static void main(String[] args) throws IOException {
+			Scanner leitor = new Scanner(System.in);
+			int T = leitor.nextInt();
+			int B, A1, D1, L1, A2, D2, L2, V1, V2;
+			for (int i = 0; i < T; i++) {
+				B = leitor.nextInt();
+				A1 = leitor.nextInt();
+				D1 = leitor.nextInt();
+				L1 = leitor.nextInt();
+				A2 = leitor.nextInt();
+				D2 = leitor.nextInt();
+				L2 = leitor.nextInt();
+
+				V1 = ((A1 + D1) / 2) + (L1 % 2 == 0 ? B : 0);
+				V2 = ((A2 + D2) / 2) + (L2 % 2 == 0 ? B : 0);
+				
+		    if (V1 > V2) System.out.println("Bruno");
+				else if (V2 > V1) System.out.println("Guarte");
+				else System.out.println("Empate");
+			}
+		}
+	}
+ 
+ --- 3/3 - Lanche -----------------------
+ 
+	import java.util.Scanner;
+
+	public class Teste {
+		public static void main(String[] args) {
+			int X, Y;
+			float preco = 0;			
+			Scanner input = new Scanner(System.in);
+			X = input.nextInt();
+			Y = input.nextInt();
+			if (X == 1) {
+				preco  = (float) (4.00 * Y);
+			} else if (X == 2) {
+				preco  = (float) (4.50 * Y);  //implemente sua lógica aqui
+			} else if (X == 3) {
+				preco  = (float) (5.00 * Y);  //implemente sua lógica aqui 
+			} else if (X == 4) {
+				preco  = (float) (2.00 * Y); //implemente sua lógica aqui
+			} else if (X == 5) {
+				preco  = (float) (1.5 * Y); //implemente sua lógica aqui
+			}			
+			System.out.printf("Total: R$ %.2f\n",preco);
+		}
+	}
+ 
+ ---- Desafios - GFT Start #3 Java -------------
+ 
+ --- 1/3 - Fases da Lua --------------
+ 
+	import java.util.Scanner;
+
+	public class Teste {
+
+		public static void main(String[] args) {
+		    Scanner leitor = new Scanner(System.in);
+		    
+		    int inicio = leitor.nextInt();
+		    int fim = leitor.nextInt();
+		    
+		    if (inicio >= 0 && fim <= 2) {
+		        System.out.println("nova");
+		    } 
+
+		    //implemente o código aqui
+		    else if (inicio >= 2 && fim <= 3) {
+		        System.out.println("minguante");
+		    } 
+		  
+		    else if (inicio >= 95 && fim <= 100) {
+		        System.out.println("cheia");
+		    } 
+		    
+		    else {
+		        System.out.println("crescente");
+		    }
+		}
+	}
+ 
+ --- 2/3 - Reservatório de Mel -------------
+ 
+	import java.io.IOException;
+	import java.text.DecimalFormat;
+	import java.util.Scanner;
+
+	public class Problem {
+		
+	  public static void main(String[] args) throws IOException {
+	  	Scanner leitor = new Scanner(System.in);
+	  	DecimalFormat df = new DecimalFormat("0.00");
+	  	double V, D, R, area, altura;
+	  	while (leitor.hasNext()) {
+	  		V = leitor.nextDouble();
+	  		D = leitor.nextDouble();
+	  		R = D / 2;
+	  		area = 3.14 * R * R;
+	  		altura = V / area;
+	  		System.out.println("ALTURA = " + df.format(altura));
+	  		System.out.println("AREA = " + df.format(area));
+	  	}
+	  }
+	}
+	
+ --- 3/3 - Senha Fixa ---------------------
+ 
+	import java.io.IOException;
+	import java.util.Scanner;
+
+	public class Teste {
+
+		public static void main(String[] args) throws IOException {
+			Scanner leitor = new Scanner(System.in);
+			
+		  //implemente o seu código aqui
+			while(leitor.nextInt() != 2002) {
+		    System.out.println("Senha Invalida");
+			}
+		  System.out.println("Acesso Permitido");
+		}
+	}
+ 
+ ---- Desafios Intermediários - GFT Start #3 Java -------
+ 
+ --- 1/3 -  A Mensagem do padre do balão -------
+ 
+	import java.io.IOException;
+	import java.util.Scanner;
+
+	public class Problem {
+	 //complete os espaços em branco com uma solução possível
+		public static void main(String[] args) throws IOException {
+			Scanner leitor = new Scanner(System.in);
+			while (leitor.hasNext()) {
+				String alphabet = leitor.next();
+				String word = "";
+				int letters = leitor.nextInt();
+				for (int i = 0; i < letters); i++) {
+				  int letter = leitor.nextInt() - 1;
+				  word += alphabet.charAt(letter);
+				}
+				System.out.println(word);
+			}
+		}
+	}
+ 
+ --- 2/3 - Top N ---------------------
+ 
+	import java.util.Scanner;
+
+	public class Problem {
+
+		public static void main(String[] args) {
+		    Scanner scan = new Scanner(System.in);
+		    int[] TOPS = {1, 3, 5, 10, 25, 50, 100};
+
+		    int K = scan.nextInt();
+		    String top = "Top ";
+		    
+		    for(int i = 0; i < TOPS.length; i++) { 
+		      if (K <= TOPS[i]) {
+		        System.out.println(top + TOPS[i]);
+		        break;
+		      }
+		    }
+		}
+	}
+ 
+ --- 3/3 - Acima da Diagonal Principal
+
+
+	import java.io.IOException;
+	import java.util.Scanner;
+
+	public class Main{
+
+		public static void main(String[] args) throws IOException {
+		    Scanner leitor = new Scanner(System.in);
+
+		    //digite o seu código
+		    double soma = 0;
+		    char O = leitor.next().charAt(0);
+		    double[][] M = new double[12][12];
+		    for (int i = 0; i < M.length; i++) {
+		      for (int j = 0; j < M[i].length; j++) {
+		        
+		        M[i][j] = leitor.nextDouble();
+		      }
+		    }
+		    
+		    for (int i = 0; i < M.length; i++) {
+		      for (int j = 0; j < M[i].length; j++) {
+		        if(j > i) soma += M[i][j];
+		      }
+		    }
+		    
+		    if(String.valueOf(O).contains("M")) soma = soma / 66;
+		    System.out.println(String.format("%.1f", soma));
+		}
+	}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
  
  
  
